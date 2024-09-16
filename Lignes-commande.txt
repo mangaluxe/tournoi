@@ -1,0 +1,107 @@
+﻿========== Git global setup ==========
+
+git config --global user.name "Pseudo"
+git config --global user.email "pseudo@email.com"
+
+========== Premier Push après création de projet sur Github/Gitlab ==========
+
+En ligne de commande, aller dans le bon dossier. Exemple : cd ../test/
+
+git init --initial-branch=main
+git remote add origin https://github.com/mangaluxe/tournoi.git
+
+git add .
+git commit -m "initial commit"
+git push -u origin main
+
+========== Cloner (le plus simple est de créer un projet sur Github/Gitlab, puis de cloner) ==========
+
+En ligne de commande, aller dans le bon dossier. Exemple : cd ../test/
+
+git clone https://github.com/mangaluxe/tournoi.git
+cd test
+
+========== Pull ==========
+
+En ligne de commande, aller dans le bon dossier. Exemple : cd ../test/
+
+git status
+git pull
+
+========== Pull & Push ==========
+
+En ligne de commande, aller dans le bon dossier. Exemple : cd ../test/
+
+git status
+
+Si changement de branche : git checkout develop
+
+git add .
+git commit -a -m "minor update"
+git pull
+git push
+
+Si conflit. Après correction de conflit : git commit -a -m "merge"
+
+a pour ajout. m pour message. Marche aussi: git commit -am "minor update"
+
+========== Infos ==========
+
+git status
+git diff
+git log
+git log --stat
+
+========== Revenir en arrière ==========
+
+git log
+git revert <commit>
+
+Exemple : git revert 298d68646d851cda524cadbfb4c55d58025c5e65
+
+Puis : Q + Entrée pour quitter
+
+========== Supprimer un commit de l'historique ==========
+
+git reset --soft <commit> : Réinitialise l'index au commit spécifié, sans toucher à l'arbre de travail.
+
+git reset --mixed <commit> : Réinitialise l'index et l'arbre de travail au commit spécifié.
+
+git reset --hard <commit> : Réinitialise l'index et l'arbre de travail au commit spécifié, supprimant toutes les modifications.
+
+========== Branches ==========
+
+git branch  : Lister l'ensemble des branches du dépôt.
+
+git branch <branch> : créé une nouvelle branche mais ne se déplace pas sur celle-ci.
+git checkout <branch> : Se déplacer sur un branche existante.
+
+git checkout -b ＜new-branch＞ : créer une branche et s'y déplacer.
+
+git branch -d <branch> : Supprime la branche de manière sécurisée.
+git branch -D <branch> : Force la suppression de la branche.
+git branch -m <branch> : Renomme la branche actuelle.
+
+git branch -f <branch> 298d6
+
+git branch -a : Liste les branches distantes.
+
+git commit -m "commit new branch"
+
+========== Merge ==========
+
+git checkout -b branche3 # Nouvelle branche créé
+
+# On modifie un fichier
+
+git checkout main # On revient sur la branche main
+
+# On modifie le même fichier
+
+git merge branche3 # On fusionne et il va avoir un conflit
+
+========== Rebase ==========
+
+git checkout branche3 # On revient sur la branche 3
+
+git rebase main # On rebase main

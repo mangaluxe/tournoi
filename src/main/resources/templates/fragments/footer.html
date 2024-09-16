@@ -1,0 +1,45 @@
+
+<!-- Pour pouvoir faire include dans un autre html : -->
+<th:block th:fragment="footerImports">
+
+    <div class="totop"></div>
+
+    <div id="connect-modal" class="modal-connect-overlay">
+        <div class="modal-connect">
+            <div class="modal-connect-header">
+                <span class="close-connect"></span>
+                <div class="h4 mb-0">Connexion</div>
+            </div>
+            <div class="modal-connect-body">
+                <form method="post" th:action="@{/login}">
+                    <label for="login_username">Pseudo :<br>
+                        <input type="text" name="username" id="login_username" placeholder="username">
+                    </label><br>
+                    <label for="login_password">Mot de passe :<br>
+                        <input type="password" name="password" id="login_password" placeholder="Mot de passe">
+                    </label>
+                    <button type="submit" value="Connecter">Connecter</button>
+                </form>
+                <div class="center">
+<!--                    <a th:href="@{/registration}">Inscrire</a> - -->
+                    <a href="#">Mot de passe oublié</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:fragment="footer" class="footer">
+        <div class="copyright">Copyright © 2024 Haiou, Rémi, Nicolas.</div>
+    </footer>
+
+    <script th:src="@{/assets/js/script.js}"></script>
+    <script th:src="@{/assets/js/ckeditor.js}"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'));
+    </script>
+
+</body>
+</html>
+
+</th:block>
