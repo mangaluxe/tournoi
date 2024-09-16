@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -29,14 +30,17 @@ public class Tournoi {
 
     private int maxJoueurs;
 
-    private LocalDate dateDebut; // Date de début du tournoi
+    private LocalDateTime dateDebut; // Datetime de début du tournoi
 
-    private LocalDate dateFin; // Date de fin du tournoi
+    private LocalDateTime dateFin; // Datetime de fin du tournoi
 
     // ---------- Relations ----------
 
-    @OneToMany(mappedBy = "tournoi")
+    @OneToMany(mappedBy = "tournoi", cascade = CascadeType.REMOVE) // Cascade pour supprimer automatiquement les inscriptions si un tournoi est effacé
     private List<Inscription> inscriptions; // Liste des inscriptions liées au tournoi
+
+    @OneToMany(mappedBy = "tournoi", cascade = CascadeType.REMOVE) // Cascade pour supprimer automatiquement les parties si un tournoi est effacé
+    private List<Partie> parties; // Liste des parties liées au tournoi
 
 }
 

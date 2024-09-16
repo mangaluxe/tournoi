@@ -24,8 +24,21 @@ public class TournoiService {
 
     // ========== Méthodes ==========
 
+    // ----- Read -----
+
+    /**
+     * Obtenir tous les tournois
+     */
     public List<Tournoi> getAllTournois() {
         return tournoiRepository.findAll();
+    }
+
+
+    /**
+     * Obtenir un tournoi par id
+     */
+    public Tournoi getTournoiById(int id) {
+        return tournoiRepository.findById(id).orElse(null);
     }
 
 
@@ -37,7 +50,26 @@ public class TournoiService {
         return tournoiRepository.count();
     }
 
+    // ----- Create -----
 
+    /**
+     * Créer un tournoi
+     */
+    public void creerTournoi(Tournoi tournoi) {
+        tournoiRepository.save(tournoi);
+    }
+
+    // ----- Update -----
+
+
+    // ----- Delete -----
+
+    /**
+     * Supprimer un tournoi par son id
+     */
+    public void supprimerTournoi(int id) {
+        tournoiRepository.deleteById(id); // deleteById() auto-geré par JPA
+    }
 
 
 }

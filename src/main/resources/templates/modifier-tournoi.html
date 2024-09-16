@@ -1,0 +1,66 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+
+<div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Modifier Tournoi', currentPage='')}"></div>
+
+    <main>
+
+        <h1 class="h1 center">Modifier le Tournoi</h1>
+
+        <form th:action="@{/tournoi/{id}/modifier(id=${tournoi.id})}" th:object="${tournoi}" method="post">
+
+            <div>
+                <label for="nom">Nom du tournoi :
+                    <input type="text" id="nom" th:field="*{nom}" required>
+                </label>
+            </div>
+
+            <div>
+                <label for="jeu">Jeu :
+                    <input type="text" id="jeu" th:field="*{jeu}" required>
+                </label>
+            </div>
+
+            <div>
+                <label for="format">Format :
+                    <input type="text" id="format" th:field="*{format}" required>
+                </label>
+            </div>
+
+            <div>
+                <label for="regles">Règles :
+                    <textarea id="regles" th:field="*{regles}" required></textarea>
+                </label>
+            </div>
+
+            <div>
+                <label for="maxJoueurs">Nombre maximum de joueurs :
+                    <input type="number" id="maxJoueurs" th:field="*{maxJoueurs}" required>
+                </label>
+            </div>
+
+            <div>
+                <label for="dateDebut">Date et heure de début :
+                    <input type="datetime-local" id="dateDebut" th:field="*{dateDebut}" required>
+                </label>
+            </div>
+
+            <div>
+                <label for="dateFin">Date et heure de fin :
+                    <input type="datetime-local" id="dateFin" th:field="*{dateFin}" required>
+                </label>
+            </div>
+
+            <button type="submit" class="btn">Sauvegarder</button>
+        </form>
+
+    </main>
+</div>
+
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>

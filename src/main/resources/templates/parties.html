@@ -1,0 +1,37 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+
+<div class="container">
+
+    <main>
+
+        <h1 class="h1 center">Liste des parties</h1>
+
+        <ul class="li-arrow" th:each="partie : ${parties}">
+            <li>
+                Joueur 1 : <span th:text="${partie.joueur1.pseudo}"></span> vs Joueur 2 : <span th:text="${partie.joueur2.pseudo}"></span>
+                <br>
+                <!--            Date : <span th:text="${#dates.format(partie.dateHeure, 'dd/MM/yyyy HH:mm')}"></span>-->
+                Date : <span th:text="${#dates.format(partie.dateHeure)}"></span>
+                <br>
+                Résultat : <span th:text="${partie.resultat == 1 ? 'Joueur 1 gagne' : (partie.resultat == 2 ? 'Joueur 2 gagne' : 'En attente')}"></span>
+                <br>
+                <a th:href="@{|/partie/${partie.id}/modifier|}">Modifier</a> |
+                <form th:action="@{|/partie/${partie.id}/supprimer|}" method="post" onsubmit="return confirm('Supprimer cette partie ?');">
+                    <button type="submit" class="mini-btn">Supprimer</button>
+                </form>
+            </li>
+        </ul>
+
+        <a href="/partie/nouveau" class="btn">Créer une nouvelle partie</a>
+
+    </main>
+
+</div>
+
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>

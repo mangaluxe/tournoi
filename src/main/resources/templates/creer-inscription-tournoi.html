@@ -1,0 +1,40 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+
+<div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Créer Inscription', currentPage='')}"></div>
+
+    <main>
+
+        <h1 class="h1 center">Créer une Inscription à un tournoi</h1>
+
+        <form th:action="@{/inscription-tournoi/nouveau}" th:object="${inscription}" method="post">
+
+            <div class="form-group">
+                <label for="tournoi">Tournoi</label>
+                <select id="tournoi" name="tournoi.id" class="form-control" required>
+                    <option value="" disabled selected>Sélectionner un tournoi</option>
+                    <option th:each="tournoi : ${tournois}" th:value="${tournoi.id}" th:text="${tournoi.nom}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="joueur">Joueur</label>
+                <select id="joueur" name="joueur.id" class="form-control" required>
+                    <option value="" disabled selected>Sélectionner un joueur</option>
+                    <option th:each="joueur : ${joueurs}" th:value="${joueur.id}" th:text="${joueur.pseudo}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Envoyer inscription</button>
+        </form>
+
+    </main>
+</div>
+
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>

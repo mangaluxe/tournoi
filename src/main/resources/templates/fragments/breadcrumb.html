@@ -1,7 +1,7 @@
 <div th:fragment="breadcrumb (pageName, currentPage)">
     <div class="breadcrumb">
         <a th:href="@{/}"><span class="icon-home"></span> Accueil</a>
-        <span th:if="${pageName != ''}"> > </span><a th:href="@{/sujets}" th:text="${pageName}"></a>
+        <span th:if="${pageName != ''}"> > </span><a th:href="@{/tournois}" th:text="${pageName}"></a>
         > <span th:text="${currentPage}"></span>
     </div>
 </div>

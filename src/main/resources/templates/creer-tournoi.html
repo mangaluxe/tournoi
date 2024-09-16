@@ -1,0 +1,61 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+
+<div class="container">
+     <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Créer')}"></div>
+
+    <main>
+
+        <h1 class="h1 center">Créer un Tournoi</h1>
+
+        <form action="#" th:action="@{/tournoi/nouveau}" th:object="${tournoi}" method="post">
+            <div>
+                <label for="nom">Nom du Tournoi :
+                    <input type="text" id="nom" th:field="*{nom}">
+                </label>
+            </div>
+            <div>
+                <label for="jeu">Jeu :
+                    <input type="text" id="jeu" th:field="*{jeu}">
+                </label>
+            </div>
+            <div>
+                <label for="format">Format :
+                    <input type="text" id="format" th:field="*{format}">
+                </label>
+            </div>
+            <div>
+                <label for="regles">Règles :
+                    <textarea id="regles" th:field="*{regles}"></textarea>
+                </label>
+            </div>
+            <div>
+                <label for="max_joueurs">Max Joueurs :
+                    <input type="number" id="max_joueurs" th:field="*{maxJoueurs}">
+                </label>
+            </div>
+            <div>
+                <label for="date_debut">Date et heure de Début :
+                    <input type="datetime-local" id="date_debut" th:field="*{dateDebut}">
+                </label>
+            </div>
+            <div>
+                <label for="date_fin">Date et heure de Fin :
+                    <input type="datetime-local" id="date_fin" th:field="*{dateFin}">
+                </label>
+            </div>
+            <div>
+                <button type="submit" class="btn">Créer</button>
+            </div>
+        </form>
+
+    </main>
+</div>
+
+
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>

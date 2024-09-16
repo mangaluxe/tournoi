@@ -9,13 +9,40 @@
     <main>
         <h1 class="h1 center">Liste des tournois</h1>
 
-        <h2 class="h-box-shadow">Les prochaines tournois :</h2>
-        <ul class="li-arrow">
-            <li>...</li>
-            <li>...</li>
-        </ul>
+        <h2 class="h-box-shadow">Les prochains tournois :</h2>
 
         <p>Nombre total de tournois : <span th:text="${nbTotalTournois}">0</span></p>
+
+        <div class="table-list-head topics-box">
+            <div class="e b">Tournoi</div>
+            <div class="e b">Date</div>
+            <div class="e b">Modifier</div>
+            <div class="e b">Supprimer</div>
+        </div>
+        <ul class="table-list topics-box">
+            <li th:each="t : ${tournois}">
+                <div class="e">
+                    <div class="topics-box-title-icon icon-gamepad"></div>
+                    <div class="">
+                        <div><a th:href="@{|/tournoi/${t.id}|}"><strong th:text="${t.nom}"></strong></a></div>
+                        <div th:text="${t.jeu}"></div>
+                    </div>
+                </div>
+                <div class="e center-center">
+                    <span th:text="${t.getDateDebut()}"></span>
+                </div>
+                <div class="e center-center">
+                    <a th:href="@{|/tournoi/${t.id}/modifier|}" class="mini-btn">Modifier<span class="icon-pencil"></span></a>
+                </div>
+                <div class="e center-center">
+                    <form class="mb-0" th:action="@{|/tournoi/${t.id}/supprimer|}" method="post" onsubmit="return confirm('Supprimer ce tournoi ?');">
+                        <button type="submit" class="mini-btn">Supprimer<span class="icon-cross"></span></button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+
+        <a href="/tournoi/nouveau" class="btn mt-5">Créer tournoi</a>
 
     </main>
 </div>

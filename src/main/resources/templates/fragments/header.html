@@ -18,18 +18,18 @@
 <body>
 
     <header th:fragment="header" class="header">
-<!--        <div class="header-top">-->
-<!--            <ul class="px-2">-->
-<!--                &lt;!&ndash; <li><a href="https://www.mangaluxe.com/forum/">Forum</a></li> &ndash;&gt;-->
-<!--                &lt;!&ndash; <li><a href="https://www.mangaluxe.com/chat/">Tchat</a></li> &ndash;&gt;-->
-<!--            </ul>-->
-<!--            <ul class="px-2">-->
-<!--                <li><a href="#" target="_blank" class="icon-f"></a></li>-->
-<!--                <li><a href="#" target="_blank" class="icon-t"></a></li>-->
-<!--                <li><a href="#" target="_blank" class="icon-i"></a></li>-->
-<!--                <li><a href="#" target="_blank" class="icon-y"></a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
+        <div class="header-top">
+            <ul class="px-2">
+                <!-- <li><a href="https://www.mangaluxe.com/forum/">Forum</a></li> -->
+                <!-- <li><a href="https://www.mangaluxe.com/chat/">Tchat</a></li> -->
+            </ul>
+            <ul class="px-2">
+                <li><a href="#" target="_blank" class="icon-f"></a></li>
+                <li><a href="#" target="_blank" class="icon-t"></a></li>
+                <li><a href="#" target="_blank" class="icon-i"></a></li>
+                <li><a href="#" target="_blank" class="icon-y"></a></li>
+            </ul>
+        </div>
 
         <div class="header-nav">
             <div class="header-nav-child1">
@@ -50,7 +50,19 @@
                         <ul class="ul-1">
                             <li><a th:href="@{/tournois}">Liste de tournois</a></li>
 <!--                            <li><a href="#">Inscrire</a></li>-->
-                            <li><a th:href="@{/users}">Inscrire</a></li>
+                            <li><a th:href="@{/registration}">Inscrire</a></li>
+                            <li class="dropdown">
+                                <div>
+                                    <span class="drop-a">Inscriptions aux tournois</span>
+                                    <div class="open-submenu"></div>
+                                </div>
+                                <div class="dropdown-content">
+                                    <ul class="ul-2">
+                                        <li><a th:href="@{/inscription-tournoi/nouveau}">Inscrire aux tournois</a></li>
+                                        <li><a th:href="@{/inscriptions-tournois}">Liste inscriptions aux tournois</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                             <li class="dropdown">
                                 <div>
                                     <span class="drop-a">Infos</span>

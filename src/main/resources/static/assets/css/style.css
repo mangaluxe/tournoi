@@ -294,6 +294,11 @@ td {
 
 .center {text-align: center}
 .right {text-align: right}
+.center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* ----- Marges ----- */
 
@@ -418,6 +423,7 @@ main input[type="number"],
 main input[type="url"],
 main input[type="email"],
 main input[type="date"],
+main input[type="datetime-local"],
 main input[type="password"],
 main textarea,
 main select {
@@ -1365,15 +1371,19 @@ body.popup-search-actif {
 
 .forum-home .e:nth-child(1),
 .topics-box .e:nth-child(1) {
-    width: 67%;
+    width: 25%;
 }
 .forum-home .e:nth-child(2),
 .topics-box .e:nth-child(2) {
-    width: 7%;
+    width: 25%;
 }
 .forum-home .e:nth-child(3),
 .topics-box .e:nth-child(3) {
-    width: 26%;
+    width: 25%;
+}
+.forum-home .e:nth-child(4),
+.topics-box .e:nth-child(4) {
+    width: 25%;
 }
 
 .topics-box li {
