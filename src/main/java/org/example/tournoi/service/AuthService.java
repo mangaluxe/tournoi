@@ -24,7 +24,7 @@ public class AuthService {
     }
 
     public boolean login(String pseudo, String motdepasse) {
-        Utilisateur utilisateur = utilisateurRepository.findByUsername(pseudo);
+        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
         if(utilisateur.getMotdepasse().equals(motdepasse)) {
             httpSession.setAttribute("pseudo", utilisateur.getPseudo());
             httpSession.setAttribute("login", "OK");
