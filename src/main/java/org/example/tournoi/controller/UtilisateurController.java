@@ -22,7 +22,6 @@ public class UtilisateurController {
         this.authService = authService;
     }
 
-
     @RequestMapping("/inscription")
     public String formAddUser(Model model) {
         if (!authService.isLogged()) {
@@ -32,12 +31,22 @@ public class UtilisateurController {
         return "index";
     }
 
+    @PostMapping("/add")
+    public String addUser(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult result) {
+        if (result.hasErrors()) {
+            return "registration-form"; // Retourne à la page d'inscription si des erreurs de validation sont présentes
+        }
+        utilisateurService.createUser(utilisateur);
+        return "redirect:/";
+    }
+
+
 //    @PostMapping("/add")
 //    public String addUser(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult result) {
 //        if (result.hasErrors()) {
 //            return "inscription";
 //        } else {
-//            if (utilisateur.getId() != 0) { //ne fonctionne pas avec null. Solution, remplacer int par Interger ou null par zéro
+//            if (utilisateur.getId() != 0) { //ne fonctionne pas avec null. Solution: remplacer int par Interger ou null par zéro
 //                utilisateurService.updateUser(utilisateur.getId(), utilisateur);
 //            } else {
 //                utilisateurService.createUser(utilisateur);

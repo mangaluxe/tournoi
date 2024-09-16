@@ -16,17 +16,13 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @RequestMapping("/registration")
-    public String inscription(Model model){
-        model.addAttribute("utilisateur", new Utilisateur());
-        return "registration-form";
-    }
 
-    @PostMapping("/registration")
-    public String inscriptionForm(@ModelAttribute("utilisateur") Utilisateur utilisateur){
-        authService.register(utilisateur);
-        return "redirect:/";
-    }
+// Non nécessaire car fait doublon avec la méthode dans UtilisateurController
+//    @PostMapping("/inscription")
+//    public String inscriptionForm(@ModelAttribute("utilisateur") Utilisateur utilisateur){
+//        authService.register(utilisateur);
+//        return "redirect:/";
+//    }
 
     @RequestMapping("/login")
     public String connexion(Model model){
