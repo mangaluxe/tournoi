@@ -1,0 +1,27 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+
+<div class="container">
+     <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='')}"></div>
+
+    <main>
+        <h1 class="h1 center">Liste des tournois</h1>
+
+        <h2 class="h-box-shadow">Les prochaines tournois :</h2>
+        <ul class="li-arrow">
+            <li>...</li>
+            <li>...</li>
+        </ul>
+
+        <p>Nombre total de tournois : <span th:text="${nbTotalTournois}">0</span></p>
+
+    </main>
+</div>
+
+
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>
