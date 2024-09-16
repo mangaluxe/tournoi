@@ -25,7 +25,7 @@ public class UtilisateurService {
     }
 
     public Utilisateur searchUser(String search) {
-        return utilisateurRepository.findByUsername(search);
+        return utilisateurRepository.findByPseudo(search);
     }
 
     public Utilisateur getUserById(int id) {
