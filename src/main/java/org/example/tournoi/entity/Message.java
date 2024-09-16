@@ -18,7 +18,9 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, length = 1000)
+    private String titre;
+
+    @Column(nullable = false, length = 65535) // 65535 = taille max pour TEXT
     private String contenu; // Contenu du message
 
     private LocalDateTime dateEnvoi; // Date et heure d'envoi du message
