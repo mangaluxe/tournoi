@@ -1,0 +1,11 @@
+﻿BDD :
+
+- Diagramme : Nicolas
+- Merise : Rémi
+- Entity : Haiou
+
+Controller/Service/Dao :
+
+- Utilisateur : Rémi
+- Tournoi : Haiou
+- Message : Nicolas
