@@ -1,5 +1,6 @@
 package org.example.tournoi.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.example.tournoi.entity.Inscription;
 import org.example.tournoi.entity.Tournoi;
 import org.example.tournoi.entity.Utilisateur;
@@ -42,13 +43,11 @@ public class InscriptionController {
     @GetMapping("/inscription-tournoi/nouveau")
     public String formulaireInscriptionTournoi(Model model) {
 
-//        List<Tournoi> tournois = tournoiService.getAllTournois();
-//
-//        List<Utilisateur> utilisateurs = utilisateurService.getAllUtilisateurs(); // Attends que Rémi termine l'utilisateur
-//
-//        model.addAttribute("tournois", tournois);
-//        model.addAttribute("utilisateurs", utilisateurs);
-//        model.addAttribute("inscription", new Inscription());
+        List<Tournoi> tournois = tournoiService.getAllTournois();
+
+        model.addAttribute("title", "Inscription aux tournois"); // Pour le title de la page
+        model.addAttribute("tournois", tournois);
+        model.addAttribute("inscription", new Inscription());
 
         return "creer-inscription-tournoi";
     }
@@ -57,9 +56,29 @@ public class InscriptionController {
      * Inscrire un utilisateur à un tournoi
      */
     @PostMapping("/inscription-tournoi/nouveau")
-    public String creerInscriptionTournoi(@ModelAttribute("inscription") Inscription inscription) {
-        inscriptionService.creerInscription(inscription);
-        return "redirect:/inscriptions-tournois";
+    public String creerInscriptionTournoi(@ModelAttribute("inscription") Inscription inscription, HttpSession session) {
+
+        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id"); // Récupérer l'ID de l'utilisateur connecté depuis la session
+
+        if (utilisateurId != null) {
+            Utilisateur utilisateur = utilisateurService.getUtilisateurById(utilisateurId);
+            inscription.setUtilisateur(utilisateur);
+
+            if (inscription.getEstEligible() == null) {
+                inscription.setEstEligible(false);
+            }
+
+            if (inscription.getEstValide() == null) {
+                inscription.setEstValide(false);
+            }
+
+            inscriptionService.creerInscription(inscription);
+
+            return "redirect:/inscriptions-tournois";
+        }
+        else {
+            return "redirect:/login";
+        }
     }
 
 
@@ -71,12 +90,37 @@ public class InscriptionController {
     @GetMapping("/inscriptions-tournois")
     public String listeInscriptionsTournois(Model model) {
 
+        model.addAttribute("title", "Toutes les inscription aux tournois"); // Pour le title de la page
+
         List<Inscription> inscriptions = inscriptionService.getAllInscriptions();
 
         model.addAttribute("inscriptions", inscriptions);
 
         return "inscriptions-tournois";
     }
+
+
+    @GetMapping("/mes-inscriptions")
+    public String mesInscriptionsTournois(HttpSession session, Model model) {
+
+        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id"); // Récupérer l'ID de l'utilisateur connecté depuis la session
+
+        // Vérifier que l'utilisateur est bien connecté
+        if (utilisateurId != null) {
+            List<Inscription> inscriptions = inscriptionService.getInscriptionsByUtilisateurId(utilisateurId); // Récupérer les inscriptions de cet utilisateur
+            model.addAttribute("inscriptions", inscriptions);
+        }
+        else {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("title", "Mes inscriptions aux tournois");
+
+        return "mes-inscriptions";
+    }
+
+
+
 
 
     // ----- Delete -----
@@ -87,7 +131,7 @@ public class InscriptionController {
     @PostMapping("/inscription-tournoi/{id}/supprimer")
     public String supprimerInscriptionTournois(@PathVariable("id") int id) {
         inscriptionService.supprimerInscription(id);
-        return "redirect:/inscriptions-tournois"; // Redirige vers la liste des inscriptions après suppression
+        return "redirect:/inscriptions-tournois";
     }
 
 

@@ -512,6 +512,7 @@ main .form-control.form-invalid {
     background-color: #feebf8 !important;
 }
 .warning {color: #c00}
+.success {color: #139d25}
 
 /* ----- Flexbox ----- */
 

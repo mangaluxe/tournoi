@@ -1,20 +1,28 @@
 package org.example.tournoi.service;
 
-
 import org.example.tournoi.dao.UtilisateurRepository;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class UtilisateurService {
 
+    // ========== Propriétés ==========
+
     private final UtilisateurRepository utilisateurRepository;
+
+
+    // ========== Constructeur ==========
 
     public UtilisateurService(UtilisateurRepository utilisateurRepository) {
         this.utilisateurRepository = utilisateurRepository;
     }
+
+
+    // ========== Méthodes ==========
 
     public Utilisateur createUser(Utilisateur utilisateur) {
         return utilisateurRepository.save(utilisateur);
@@ -28,7 +36,7 @@ public class UtilisateurService {
         return utilisateurRepository.findByPseudo(search);
     }
 
-    public Utilisateur getUserById(int id) {
+    public Utilisateur getUtilisateurById(int id) {
         return utilisateurRepository.findById(id).orElse(null);
     }
 
@@ -37,7 +45,7 @@ public class UtilisateurService {
     }
 
     public Utilisateur updateUser(int id, Utilisateur updatedUtilisateur) {
-        Utilisateur utilisateurExist = getUserById(id);
+        Utilisateur utilisateurExist = getUtilisateurById(id);
         if(utilisateurExist != null){
             utilisateurRepository.save(updatedUtilisateur);
         }

@@ -54,7 +54,7 @@ public class UtilisateurController {
     @RequestMapping("/utilisateur/{id}")
     public String showUser(@PathVariable("id") int id, Model model) {
         if (authService.isLogged()) {
-            model.addAttribute("utilisateur", utilisateurService.getUserById(id));
+            model.addAttribute("utilisateur", utilisateurService.getUtilisateurById(id));
             return "detail";
         }
         return "index";
