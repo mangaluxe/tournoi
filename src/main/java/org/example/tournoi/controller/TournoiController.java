@@ -4,10 +4,7 @@ import org.example.tournoi.entity.Tournoi;
 import org.example.tournoi.service.TournoiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -140,8 +137,27 @@ public class TournoiController {
     // Supprimer un tournoi (annuler)
     @PostMapping("/tournoi/{id}/supprimer")
     public String supprimerTournoi(@PathVariable("id") int id) {
-        tournoiService.supprimerTournoi(id); // Appel au service pour supprimer le tournoi
-        return "redirect:/tournois"; // Redirige vers la liste des tournois après suppression
+        tournoiService.supprimerTournoi(id);
+        return "redirect:/tournois";
+    }
+
+
+    // ---- Recherche -----
+
+    /**
+     * Rechercher de sujets par leur titre approximatif
+     */
+    @GetMapping("/recherche")
+    public String recherche(@RequestParam("recherche") String recherche, @RequestParam(value = "tolerance", defaultValue = "2") int tolerance, Model model) {
+
+        // Utilisation de la recherche approximative avec une tolérance donnée
+        List<Tournoi> tournois = tournoiService.rechercheApproximativeByNom(recherche, tolerance);
+
+        model.addAttribute("recherche", recherche);
+        model.addAttribute("tournois", tournois);
+        model.addAttribute("title", "Recherche de tournois"); // Pour le titre de la page
+
+        return "recherche";
     }
 
 

@@ -1,0 +1,32 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+<div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Recherche')}"></div>
+
+    <main>
+
+        <h1 class="center h1" th:text="'Résultats de recherche pour : ' + ${recherche}"></h1>
+
+        <!-- On vérifie s'il y a des sujets -->
+        <div th:if="${tournois != null && tournois.size() > 0}">
+            <ul>
+                <li th:each="s : ${tournois}">
+                    <a th:href="@{'/tournoi/' + ${s.id}}">
+                        <span th:text="${s.nom}"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div th:if="${tournois == null || tournois.size() == 0}">
+            <p>Aucun sujet trouvé.</p>
+        </div>
+
+    </main>
+</div>
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>
