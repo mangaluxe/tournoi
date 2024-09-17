@@ -12,21 +12,44 @@ import java.util.List;
 @Service
 public class InscriptionService {
 
+    // ========== Propriétés ==========
+
     private final InscriptionRepository inscriptionRepository;
+
+
+    // ========== Constructeur ==========
 
     public InscriptionService(InscriptionRepository inscriptionRepository) {
         this.inscriptionRepository = inscriptionRepository;
     }
 
 
-//    public List<Inscription> getInscriptionsParUtilisateur(int utilisateurId) {
-//        return inscriptionRepository.findByUtilisateurId(utilisateurId);
-//    }
+    // ========== Méthodes ==========
+
+    // ----- Read -----
+
+    /**
+     * Obtenir toutes les inscriptions
+     */
+    public List<Inscription> getAllInscriptions() {
+        return inscriptionRepository.findAll();
+    }
+
+
+    /**
+     * Récupérer les inscriptions par utilisateur_id
+     */
+    public List<Inscription> getInscriptionsByUtilisateurId(int utilisateurId) {
+        return inscriptionRepository.findByUtilisateurId(utilisateurId);
+    }
+
 
     public List<Inscription> getInscriptionsParTournoi(int tournoiId) {
         return inscriptionRepository.findByTournoiId(tournoiId);
     }
 
+
+    // ----- Create -----
 
     /**
      * Créer une nouvelle inscription
@@ -45,12 +68,11 @@ public class InscriptionService {
 //        }
 //    }
 
-    /**
-     * Obtenir toutes les inscriptions
-     */
-    public List<Inscription> getAllInscriptions() {
-        return inscriptionRepository.findAll();
-    }
+
+    // ----- Update -----
+
+
+    // ----- Delete -----
 
     /**
      * Supprimer une inscription
@@ -58,4 +80,6 @@ public class InscriptionService {
     public void supprimerInscription(int id) {
         inscriptionRepository.deleteById(id);
     }
+    
 }
+

@@ -2,7 +2,9 @@ package org.example.tournoi.service;
 
 
 import jakarta.servlet.http.HttpSession;
+import org.example.tournoi.dao.RoleRepository;
 import org.example.tournoi.dao.UtilisateurRepository;
+import org.example.tournoi.entity.Role;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,15 +13,20 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final UtilisateurRepository utilisateurRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     private HttpSession httpSession;
 
-    public AuthService(UtilisateurRepository utilisateurRepository) {
+    @Autowired
+    public AuthService(UtilisateurRepository utilisateurRepository, RoleRepository roleRepository) {
         this.utilisateurRepository = utilisateurRepository;
+        this.roleRepository = roleRepository;
     }
 
     public Utilisateur register(Utilisateur utilisateur) {
+        Role role = roleRepository.findByNomRole("USER"); // Attribution du rôle USER par défaut
+        utilisateur.setRole(role);
         return utilisateurRepository.save(utilisateur);
     }
 
@@ -33,27 +40,28 @@ public class AuthService {
 //        return false;
 //    }
 
-public boolean login(String pseudo, String motdepasse) {
-    Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
+    public boolean login(String pseudo, String motdepasse) {
+        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
 
-    // Vérififie si l'utilisateur est trouvé
-    if (utilisateur == null) {
-        System.out.println("Utilisateur non trouvé pour le pseudo : " + pseudo);
-        return false; // utilisateur introuvable
+        // Vérifie si l'utilisateur est trouvé
+        if (utilisateur == null) {
+            System.out.println("Utilisateur non trouvé pour le pseudo : " + pseudo);
+            return false; // utilisateur introuvable
+        }
+        // Compare les mots de passe
+        if (utilisateur.getMotdepasse().equals(motdepasse)) {
+            // L'utilisateur est authentifié
+            httpSession.setAttribute("pseudo", utilisateur.getPseudo());
+            httpSession.setAttribute("pseudo_id", utilisateur.getId());
+            httpSession.setAttribute("login", "OK");
+            httpSession.setAttribute("role", utilisateur.getRole().getNomRole());
+            return true;
+        }
+
+        // Si les mots de passe ne correspondent pas
+        System.out.println("Mot de passe incorrect pour le pseudo : " + pseudo);
+        return false;
     }
-
-    // Compare les mots de passe
-    if (utilisateur.getMotdepasse().equals(motdepasse)) {
-        // L'utilisateur est authentifié
-        httpSession.setAttribute("pseudo", utilisateur.getPseudo());
-        httpSession.setAttribute("login", "OK");
-        return true;
-    }
-
-    // Si les mots de passe ne correspondent pas
-    System.out.println("Mot de passe incorrect pour le pseudo : " + pseudo);
-    return false;
-}
 
 
     public boolean isLogged() {
@@ -68,4 +76,9 @@ public boolean login(String pseudo, String motdepasse) {
     public void logout() {
         httpSession.invalidate();
     }
+
+    public String getCurrentUserRole() {
+        return httpSession.getAttribute("role").toString();
+    }
+
 }

@@ -4,48 +4,35 @@
 
 
 <div class="container">
-    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Créer Inscription', currentPage='')}"></div>
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Inscrire à un tournoi')}"></div>
 
     <main>
 
-        <h1 class="h1 center">Créer une Inscription à un tournoi</h1>
+        <h1 class="h1 center">S'inscrire à un tournoi</h1>
 
-        <form th:action="@{/inscription-tournoi/nouveau}" th:object="${inscription}" method="post">
+        <div th:if="${session.login != null}">
 
-            <div class="form-group">
-                <label for="tournoi">Tournoi</label>
-                <select id="tournoi" name="tournoi.id" class="form-control" required>
-                    <option value="" disabled selected>Sélectionner un tournoi</option>
-                    <option th:each="tournoi : ${tournois}" th:value="${tournoi.id}" th:text="${tournoi.nom}"></option>
-                </select>
-            </div>
+            <form th:action="@{/inscription-tournoi/nouveau}" th:object="${inscription}" method="post">
 
-            <div class="form-group">
-                <label for="joueur">Joueur</label>
-                <select id="joueur" name="joueur.id" class="form-control" required>
-                    <option value="" disabled selected>Sélectionner un joueur</option>
-                    <option th:each="joueur : ${joueurs}" th:value="${joueur.id}" th:text="${joueur.pseudo}"></option>
-                </select>
-            </div>
+                <div>Vous : <span th:text="${session.pseudo}">Pseudo</span> (pseudo_id : <span th:text="${session.pseudo_id}"></span>)</div>
 
-            <button type="submit" class="btn">Envoyer inscription</button>
-        </form>
+                <div>
+                    <label for="tournoi">Tournoi :
+                        <select id="tournoi" name="tournoi.id" class="form-control" required>
+                            <option value="" disabled selected>Sélectionner un tournoi</option>
+                            <option th:each="tournoi : ${tournois}" th:value="${tournoi.id}" th:text="${tournoi.nom}"></option>
+                        </select>
+                    </label>
+                </div>
 
+                <button type="submit" class="btn">Inscrire</button>
+            </form>
 
-<!--        <form th:action="@{/inscription-tournoi/nouveau}" method="post">-->
-<!--            <label for="utilisateur">Utilisateur :</label>-->
-<!--            <select id="utilisateur" name="utilisateur.id" required>-->
-<!--                <option th:each="u : ${utilisateurs}" th:value="${u.id}" th:text="${u.pseudo}"></option>-->
-<!--            </select>-->
+        </div>
 
-<!--            <label for="tournoi">Tournoi :</label>-->
-<!--            <select id="tournoi" name="tournoi.id" required>-->
-<!--                <option th:each="t : ${tournois}" th:value="${t.id}" th:text="${t.nom}"></option>-->
-<!--            </select>-->
-
-<!--            <button type="submit">Inscrire</button>-->
-<!--        </form>-->
-
+        <div th:if="${session.login == null}">
+            <p>Vous devez vous connecter pour participer à un tournoi.</p>
+        </div>
 
     </main>
 </div>
