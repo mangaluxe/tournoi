@@ -4,25 +4,26 @@
 
 
 <div class="container">
-    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Tournoi')}"></div>
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Mon Inscription')}"></div>
 
     <main>
 
-        <h1 class="h1 center" th:text="'Détail du Tournoi : ' + ${tournoi.nom}"></h1>
+        <h1 class="h1 center">Détail de l'inscription</h1>
 
-        <div class="box">
-            <div class="box-title"><span th:text="${tournoi.nom}"></span></div>
-            <div class="box-padding">
-                <p><strong>Jeu :</strong> <span th:text="${tournoi.jeu}"></span></p>
-                <p><strong>Format :</strong> <span th:text="${tournoi.format}"></span></p>
-                <p><strong>Règles :</strong> <span th:text="${tournoi.regles}"></span></p>
-                <p><strong>Nombre maximum de participants :</strong> <span th:text="${tournoi.maxJoueurs}"></span></p>
-                <p><strong>Date de début :</strong> <span th:text="${tournoi.dateDebut}"></span></p>
-                <p><strong>Date de fin :</strong> <span th:text="${tournoi.dateFin}"></span></p>
-            </div>
+        <div class="inscription-details">
+            <p><strong>Nom du tournoi :</strong> <span th:text="${inscription.tournoi.nom}"></span></p>
+            <p><strong>Date du tournoi :</strong> <span th:text="${inscription.tournoi.date}"></span></p>
+            <p><strong>Statut de l'inscription :</strong>
+                <span th:if="${inscription.estValide}" th:text="'Validée'"></span>
+                <span th:if="${!inscription.estValide}" th:text="'En attente'"></span>
+            </p>
+            <p><strong>Éligibilité :</strong>
+                <span th:if="${inscription.estEligible}" th:text="'Éligible'"></span>
+                <span th:if="${!inscription.estEligible}" th:text="'Non éligible'"></span>
+            </p>
         </div>
 
-        <a href="/mes-inscriptions">Retour à la liste des inscriptions</a>
+        <a href="/mes-inscriptions" class="btn">Retour</a>
 
     </main>
 </div>

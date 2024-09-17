@@ -44,6 +44,14 @@ public class InscriptionService {
     }
 
 
+    /**
+     * Obtenir une inscription par id
+     */
+    public Inscription getInscriptionById(int id) {
+        return inscriptionRepository.findById(id).orElse(null);
+    }
+
+
     public List<Inscription> getInscriptionsParTournoi(int tournoiId) {
         return inscriptionRepository.findByTournoiId(tournoiId);
     }
@@ -80,6 +88,6 @@ public class InscriptionService {
     public void supprimerInscription(int id) {
         inscriptionRepository.deleteById(id);
     }
-    
+
 }
 

@@ -100,6 +100,9 @@ public class InscriptionController {
     }
 
 
+    /**
+     * Afficher mes inscriptions
+     */
     @GetMapping("/mes-inscriptions")
     public String mesInscriptionsTournois(HttpSession session, Model model) {
 
@@ -120,21 +123,25 @@ public class InscriptionController {
     }
 
 
-//    @GetMapping("/inscription/{id}")
-//    public String monInscriptionTournoi(@PathVariable("id") int id, HttpSession session, Model model) {
-//
-//        Inscription inscription = inscriptionService.getInscriptionById(id);
-//
-//        if (inscription != null) {
-//            model.addAttribute("inscription", inscription);
-//            model.addAttribute("title", "Mon inscription"; // Pour le title de la page
-//            return "mon-inscription";
-//        }
-//        else {
-//            return "error/404";
-//        }
-//
-//    }
+    /**
+     * Afficher une inscription
+     */
+    @GetMapping("/inscription/{id}")
+    public String monInscriptionTournoi(@PathVariable("id") int id, HttpSession session, Model model) {
+
+        Inscription inscription = inscriptionService.getInscriptionById(id);
+        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id");
+
+        // Vérifier que l'inscription existe et que l'utilisateur est bien le propriétaire
+        if (inscription != null && inscription.getUtilisateur().getId() == utilisateurId) {
+            model.addAttribute("inscription", inscription);
+            model.addAttribute("title", "Mon inscription");
+            return "mon-inscription";
+        }
+        else {
+            return "error/404"; // Si l'inscription n'existe pas ou l'utilisateur n'est pas propriétaire, renvoyer une erreur 404
+        }
+    }
 
 
     // ----- Delete -----
