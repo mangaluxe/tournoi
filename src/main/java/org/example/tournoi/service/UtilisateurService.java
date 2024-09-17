@@ -1,20 +1,28 @@
 package org.example.tournoi.service;
 
-
 import org.example.tournoi.dao.UtilisateurRepository;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class UtilisateurService {
 
+    // ========== Propriétés ==========
+
     private final UtilisateurRepository utilisateurRepository;
+
+
+    // ========== Constructeur ==========
 
     public UtilisateurService(UtilisateurRepository utilisateurRepository) {
         this.utilisateurRepository = utilisateurRepository;
     }
+
+
+    // ========== Méthodes ==========
 
     public Utilisateur createUser(Utilisateur utilisateur) {
         return utilisateurRepository.save(utilisateur);

@@ -98,7 +98,7 @@ public class InscriptionController {
 
         return "inscriptions-tournois";
     }
-    
+
 
     @GetMapping("/mes-inscriptions")
     public String mesInscriptionsTournois(HttpSession session, Model model) {
@@ -118,6 +118,8 @@ public class InscriptionController {
 
         return "mes-inscriptions";
     }
+
+
 
 
 
