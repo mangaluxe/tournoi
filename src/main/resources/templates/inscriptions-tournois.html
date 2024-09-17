@@ -13,7 +13,7 @@
             <li>
                 <span th:text="${i.utilisateur.pseudo}"></span> - <span th:text="${i.tournoi.nom}"></span>
 
-                <form th:action="@{|/inscription-tournoi/${inscription.id}/supprimer|}" method="post" onsubmit="return confirm('Supprimer cette inscription ?');">
+                <form th:action="@{|/inscription-tournoi/${i.id}/supprimer|}" method="post" onsubmit="return confirm('Supprimer cette inscription ?');">
                     <button type="submit" class="mini-btn">Supprimer</button>
                 </form>
             </li>
