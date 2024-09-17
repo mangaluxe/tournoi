@@ -29,11 +29,11 @@ public class Message {
 
     // ---------- Relations ----------
 
-    @ManyToOne
-    @JoinColumn(name = "expediteur_id", nullable = false)
-    private Utilisateur expediteur; // L'utilisateur qui envoie le message
-
-    @ManyToOne
-    @JoinColumn(name = "destinataire_id", nullable = false)
-    private Utilisateur destinataire; // L'utilisateur qui reçoit le message
+//    @ManyToOne
+//    @JoinColumn(name = "expediteur_id", nullable = false)
+//    private Utilisateur expediteur; // L'utilisateur qui envoie le message
+//
+//    @ManyToOne
+//    @JoinColumn(name = "destinataire_id", nullable = false)
+//    private Utilisateur destinataire; // L'utilisateur qui reçoit le message
 }

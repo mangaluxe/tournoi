@@ -74,7 +74,7 @@ public class AuthController {
             String role = authService.getCurrentUserRole();
 
             // Ajout d'un message de succès à la session
-            redirectAttributes.addFlashAttribute("successMessage", "Connexion réussie en tant que " + role + " !"); // Message flash avec rôle
+            redirectAttributes.addFlashAttribute("successMessage", "Connexion réussie !"); // Message flash
             return "redirect:/";  // Redirection normale après connexion réussie
         }
 
