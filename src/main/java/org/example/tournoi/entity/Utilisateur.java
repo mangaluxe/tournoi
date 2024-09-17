@@ -30,7 +30,7 @@ public class Utilisateur {
     private String pseudo;
 
     @NotBlank(message = "Mot de passe obligatoire")
-    @Size(min = 4, message = "Minimum 8 caractères")
+    @Size(min = 3, message = "Minimum 3 caractères")
     private String motdepasse;
 
     private String nom;
@@ -50,8 +50,8 @@ public class Utilisateur {
 
     // ---------- Relations ----------
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false) // Crée une colonne role_id sur la table 'utilisateur'
-    private Role role;
+//    @ManyToOne
+//    @JoinColumn(name = "role_id", nullable = false) // Crée une colonne role_id sur la table 'utilisateur'
+//    private Role role;
 
 }

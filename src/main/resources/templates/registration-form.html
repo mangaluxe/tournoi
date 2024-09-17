@@ -7,38 +7,44 @@
 <!--        <button class="btn btn-success">S'inscrire</button>-->
 <!--    </form>-->
 <!--</div>-->
-<div>
-    <h2>Inscription</h2>
-    <hr>
+<div class="container">
 
-    <form th:action="@{/add}" method="post" th:object="${utilisateur}">
-        <input th:field="*{id}" type="hidden">
+    <main>
+        <h1 class="h1 center">Inscription</h1>
+        <hr>
 
-        <div>
-            <label for="pseudo">Veuillez choisir un nom d'utilisateur:</label>
-            <input type="text" id="pseudo" th:field="*{pseudo}" placeholder="Nom d'utilisateur">
-            <span th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></span>
-        </div>
+        <form th:action="@{/registration}" method="post" th:object="${utilisateur}">
+            <input th:field="*{id}" type="hidden">
 
-        <div>
-            <label for="motdepasse">Mot de passe :</label>
-            <input type="password" id="motdepasse" th:field="*{motdepasse}" placeholder="mot de passe">
-            <span th:if="${#fields.hasErrors('motdepasse')}" th:errors="*{motdepasse}"></span>
-        </div>
+            <div>
+                <label for="pseudo">Nom d'utilisateur:</label>
+                <input type="text" id="pseudo" th:field="*{pseudo}">
+                <span th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></span>
+            </div>
+
+            <div>
+                <label for="motdepasse">Mot de passe :</label>
+                <input type="password" id="motdepasse" th:field="*{motdepasse}" >
+                <span th:if="${#fields.hasErrors('motdepasse')}" th:errors="*{motdepasse}"></span>
+            </div>
 
 
-        <div>
-            <label for="email">Email :</label>
-            <input type="text" id="email" th:field="*{email}">
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-        </div>
+            <div>
+                <label for="email">Email :</label>
+                <input type="text" id="email" th:field="*{email}">
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></span>
+            </div>
 
-        <div>
-            <button type="submit">Valider</button>
-            <a th:href="@{/}">Retour</a>
-        </div>
-    </form>
+            <div>
+                <button type="submit" class="btn">Valider</button>
+                <a th:href="@{/}">Retour</a>
+            </div>
+        </form>
+    </main>
+
 </div>
 
-</body>
-</html>
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>

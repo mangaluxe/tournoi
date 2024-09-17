@@ -112,19 +112,22 @@
 <!--                </div>-->
 
                 <div>
-                    <a href="javascript:void(0)" class="icon-user open-connect"><span class="txt">Connexion</span></a>
+                    <a href="javascript:void(0)"  th:if="${session.login == null}" class="icon-user open-connect"><span class="txt">Connexion</span></a>
+                    <a href="/logout" th:if="${session.login != null}" class="icon-user open-connect"><span class="txt">Se déconnecter</span></a>
+<!--                    <a class="btn btn-primary" th:if="${session.login == null}" href="/login">Connexion</a>-->
+
                 </div>
 
             </div>
         </div>
     </header>
 
-    <!-- Message flash -->
-<!--    <div th:if="${successMessage}" class="warning b center">-->
-<!--        <p th:text="${successMessage}"></p>-->
-<!--    </div>-->
-<!--    <div th:if="${errorMessage}" class="warning b center">-->
-<!--        <p th:text="${errorMessage}"></p>-->
-<!--    </div>-->
+     Message flash
+    <div th:if="${successMessage}" class="warning b center">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" class="warning b center">
+        <p th:text="${errorMessage}"></p>
+    </div>
 
 </th:block>
