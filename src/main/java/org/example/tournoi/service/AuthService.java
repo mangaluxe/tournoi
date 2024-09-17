@@ -2,7 +2,9 @@ package org.example.tournoi.service;
 
 
 import jakarta.servlet.http.HttpSession;
+import org.example.tournoi.dao.RoleRepository;
 import org.example.tournoi.dao.UtilisateurRepository;
+import org.example.tournoi.entity.Role;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,15 +13,20 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final UtilisateurRepository utilisateurRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     private HttpSession httpSession;
 
-    public AuthService(UtilisateurRepository utilisateurRepository) {
+    @Autowired
+    public AuthService(UtilisateurRepository utilisateurRepository, RoleRepository roleRepository) {
         this.utilisateurRepository = utilisateurRepository;
+        this.roleRepository = roleRepository;
     }
 
     public Utilisateur register(Utilisateur utilisateur) {
+        Role role = roleRepository.findByNomRole("USER"); // Attribution du rôle USER par défaut
+        utilisateur.setRole(role);
         return utilisateurRepository.save(utilisateur);
     }
 
@@ -47,6 +54,7 @@ public class AuthService {
             httpSession.setAttribute("pseudo", utilisateur.getPseudo());
             httpSession.setAttribute("pseudo_id", utilisateur.getId());
             httpSession.setAttribute("login", "OK");
+            httpSession.setAttribute("role", utilisateur.getRole().getNomRole());
             return true;
         }
 
@@ -68,4 +76,9 @@ public class AuthService {
     public void logout() {
         httpSession.invalidate();
     }
+
+    public String getCurrentUserRole() {
+        return httpSession.getAttribute("role").toString();
+    }
+
 }
