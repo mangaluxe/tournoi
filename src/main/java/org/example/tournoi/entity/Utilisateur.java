@@ -50,8 +50,8 @@ public class Utilisateur {
 
     // ---------- Relations ----------
 
-//    @ManyToOne
-//    @JoinColumn(name = "role_id", nullable = false) // Crée une colonne role_id sur la table 'utilisateur'
-//    private Role role;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false) // Crée une colonne role_id sur la table 'utilisateur'
+    private Role role;
 
 }

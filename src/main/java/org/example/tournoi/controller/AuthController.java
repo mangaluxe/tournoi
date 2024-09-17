@@ -26,7 +26,6 @@ public class AuthController {
 //    }
 
 
-
     @RequestMapping("/registration")
     public String formAddUser(Model model) {
         if (!authService.isLogged()) {
@@ -42,32 +41,51 @@ public class AuthController {
             authService.register(utilisateur);
             redirectAttributes.addFlashAttribute("successMessage", "Inscription réussie ! Vous pouvez maintenant vous connecter."); // Message flash
             return "redirect:/";
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
             return "registration-form";
         }
     }
 
     @RequestMapping("/login")
-    public String connexion(Model model){
+    public String connexion(Model model) {
         return "connexion-form";
     }
 
-    @PostMapping("/login")
-    public String connexionForm(@ModelAttribute("pseudo") String pseudo, @ModelAttribute("motdepasse") String motdepasse, RedirectAttributes redirectAttributes){
-        boolean connected = authService.login(pseudo, motdepasse);
-        if(connected){
-            redirectAttributes.addFlashAttribute("successMessage", "Connexion réussie !"); // Message flash
+//    @PostMapping("/login")
+//    public String connexionForm(@ModelAttribute("pseudo") String pseudo, @ModelAttribute("motdepasse") String motdepasse, RedirectAttributes redirectAttributes){
+//        boolean connected = authService.login(pseudo, motdepasse);
+//        if(connected){
+//            redirectAttributes.addFlashAttribute("successMessage", "Connexion réussie !"); // Message flash
+//
+//            return "redirect:/";
+//        }
+//        redirectAttributes.addFlashAttribute("errorMessage", "Identifiants incorrects !"); // Message flash
+//        return "redirect:/login";
+//    }
 
-            return "redirect:/";
+
+    //PostMapping en prenant en comptant la gestion des rôles
+    @PostMapping("/login")
+    public String connexionForm(@ModelAttribute("pseudo") String pseudo, @ModelAttribute("motdepasse") String motdepasse, RedirectAttributes redirectAttributes) {
+        boolean connected = authService.login(pseudo, motdepasse);
+        if (connected) {
+            // Récupération du rôle de l'utilisateur connecté
+            String role = authService.getCurrentUserRole();
+
+            // Ajout d'un message de succès à la session
+            redirectAttributes.addFlashAttribute("successMessage", "Connexion réussie en tant que " + role + " !"); // Message flash avec rôle
+            return "redirect:/";  // Redirection normale après connexion réussie
         }
+
+        // En cas d'identifiants incorrects
         redirectAttributes.addFlashAttribute("errorMessage", "Identifiants incorrects !"); // Message flash
-        return "redirect:/login";
+        return "redirect:/login"; // Retour à la page de connexion
     }
 
+
     @RequestMapping("/logout")
-    public String deconnexion(Model model){
+    public String deconnexion(Model model) {
         authService.logout();
         return "index";
     }
