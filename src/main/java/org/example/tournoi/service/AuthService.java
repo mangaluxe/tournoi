@@ -33,27 +33,27 @@ public class AuthService {
 //        return false;
 //    }
 
-public boolean login(String pseudo, String motdepasse) {
-    Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
+    public boolean login(String pseudo, String motdepasse) {
+        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
 
-    // Vérififie si l'utilisateur est trouvé
-    if (utilisateur == null) {
-        System.out.println("Utilisateur non trouvé pour le pseudo : " + pseudo);
-        return false; // utilisateur introuvable
+        // Vérifie si l'utilisateur est trouvé
+        if (utilisateur == null) {
+            System.out.println("Utilisateur non trouvé pour le pseudo : " + pseudo);
+            return false; // utilisateur introuvable
+        }
+        // Compare les mots de passe
+        if (utilisateur.getMotdepasse().equals(motdepasse)) {
+            // L'utilisateur est authentifié
+            httpSession.setAttribute("pseudo", utilisateur.getPseudo());
+            httpSession.setAttribute("pseudo_id", utilisateur.getId());
+            httpSession.setAttribute("login", "OK");
+            return true;
+        }
+
+        // Si les mots de passe ne correspondent pas
+        System.out.println("Mot de passe incorrect pour le pseudo : " + pseudo);
+        return false;
     }
-
-    // Compare les mots de passe
-    if (utilisateur.getMotdepasse().equals(motdepasse)) {
-        // L'utilisateur est authentifié
-        httpSession.setAttribute("pseudo", utilisateur.getPseudo());
-        httpSession.setAttribute("login", "OK");
-        return true;
-    }
-
-    // Si les mots de passe ne correspondent pas
-    System.out.println("Mot de passe incorrect pour le pseudo : " + pseudo);
-    return false;
-}
 
 
     public boolean isLogged() {

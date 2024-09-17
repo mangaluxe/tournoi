@@ -1,0 +1,32 @@
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+<div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='', currentPage='Connexion')}"></div>
+
+    <main>
+
+        <h1>Liste des utilisateurs</h1>
+        <table th:if="${!utilisateurs.isEmpty()}">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Pseudo</th>
+                <th>Détails</th>
+            </tr>
+            </thead>
+            <tbody th:each="u : ${utilisateurs}">
+            <tr>
+                <td th:text="${u.getId()}"></td>
+                <td th:text="${u.getPseudo()}"></td>
+                <td><a th:href="@{/utilisateur/{id}(id=${u.getId()})}">Détails</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div th:if="${utilisateurs.isEmpty()}">
+            <p>Aucun utilisateur trouvé !</p>
+        </div>
+
+
+    </main>
+
+</div>
