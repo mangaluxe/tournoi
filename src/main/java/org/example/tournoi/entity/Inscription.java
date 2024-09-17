@@ -16,9 +16,12 @@ public class Inscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private boolean estEligible; // Vérifie si l'utilisateur est éligible ou non
+    @Column(nullable = true) // Champ optionnel, peut être null
+    private Boolean estEligible;
 
-    private boolean estValide; // Valide l'inscription
+    @Column(nullable = true) // Champ optionnel
+    private Boolean estValide;
+
 
     // ---------- Relations ----------
 

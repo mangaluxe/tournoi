@@ -1,5 +1,6 @@
 package org.example.tournoi.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.example.tournoi.entity.Inscription;
 import org.example.tournoi.entity.Tournoi;
 import org.example.tournoi.entity.Utilisateur;
@@ -42,13 +43,10 @@ public class InscriptionController {
     @GetMapping("/inscription-tournoi/nouveau")
     public String formulaireInscriptionTournoi(Model model) {
 
-//        List<Tournoi> tournois = tournoiService.getAllTournois();
-//
-//        List<Utilisateur> utilisateurs = utilisateurService.getAllUtilisateurs(); // Attends que Rémi termine l'utilisateur
-//
-//        model.addAttribute("tournois", tournois);
-//        model.addAttribute("utilisateurs", utilisateurs);
-//        model.addAttribute("inscription", new Inscription());
+        List<Tournoi> tournois = tournoiService.getAllTournois();
+
+        model.addAttribute("tournois", tournois);
+        model.addAttribute("inscription", new Inscription());
 
         return "creer-inscription-tournoi";
     }
@@ -57,9 +55,29 @@ public class InscriptionController {
      * Inscrire un utilisateur à un tournoi
      */
     @PostMapping("/inscription-tournoi/nouveau")
-    public String creerInscriptionTournoi(@ModelAttribute("inscription") Inscription inscription) {
-        inscriptionService.creerInscription(inscription);
-        return "redirect:/inscriptions-tournois";
+    public String creerInscriptionTournoi(@ModelAttribute("inscription") Inscription inscription, HttpSession session) {
+
+        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id"); // Récupérer l'ID de l'utilisateur connecté depuis la session
+
+        if (utilisateurId != null) {
+//            Utilisateur utilisateur = utilisateurService.getUtilisateurById(utilisateurId);
+//            inscription.setUtilisateur(utilisateur);
+
+            if (inscription.getEstEligible() == null) {
+                inscription.setEstEligible(false);
+            }
+
+            if (inscription.getEstValide() == null) {
+                inscription.setEstValide(false);
+            }
+
+            inscriptionService.creerInscription(inscription);
+
+            return "redirect:/inscriptions-tournois";
+        }
+        else {
+            return "redirect:/login";
+        }
     }
 
 
@@ -87,7 +105,7 @@ public class InscriptionController {
     @PostMapping("/inscription-tournoi/{id}/supprimer")
     public String supprimerInscriptionTournois(@PathVariable("id") int id) {
         inscriptionService.supprimerInscription(id);
-        return "redirect:/inscriptions-tournois"; // Redirige vers la liste des inscriptions après suppression
+        return "redirect:/inscriptions-tournois";
     }
 
 
