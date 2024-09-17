@@ -1,11 +1,20 @@
 <div th:replace="~{fragments/header :: headerImports}"></div>
+
 <div class="container">
-    <h2>Connexion</h2>
-    <!--    <form th:action="@{/registration}" method="post" th:object="${utilisateur}">-->
-    <!--        <input type="text" name="utilisateur" placeholder="Nom d'utilisateur" th:field="*{pseudo}">-->
-    <!--        <input type="password" name="motdepasse" placeholder="mot de passe" th:field="*{motdepasse}">-->
-    <!--        <button class="btn btn-success">S'inscrire</button>-->
-    <!--    </form>-->
+    <main>
+        <h1>Connexion</h1>
+        <form th:action="@{/login}" method="post">
+            <div class="mb-3">
+                <label for="pseudo" class="form-label">Pseudo</label>
+                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Nom d'utilisateur">
+            </div>
+            <div class="mb-3">
+                <label for="motdepasse" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="motdepasse" name="motdepasse"
+                       placeholder="Mot de passe">
+            </div>
+            <button type="submit" class="btn btn-primary">Se connecter</button>
+        </form>
+    </main>
+
 </div>
-</body>
-</html>
