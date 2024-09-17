@@ -7,14 +7,14 @@
     <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Inscrire à un tournoi')}"></div>
 
     <main>
-        
+
         <h1 class="h1 center">S'inscrire à un tournoi</h1>
 
         <div th:if="${session.login != null}">
 
             <form th:action="@{/inscription-tournoi/nouveau}" th:object="${inscription}" method="post">
 
-                <div>Vous : <span th:text="${session.pseudo}">Pseudo</span></div>
+                <div>Vous : <span th:text="${session.pseudo}">Pseudo</span> (pseudo_id : <span th:text="${session.pseudo_id}"></span>)</div>
 
                 <div>
                     <label for="tournoi">Tournoi :

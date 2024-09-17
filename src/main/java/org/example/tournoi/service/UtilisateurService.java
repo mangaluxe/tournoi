@@ -28,7 +28,7 @@ public class UtilisateurService {
         return utilisateurRepository.findByPseudo(search);
     }
 
-    public Utilisateur getUserById(int id) {
+    public Utilisateur getUtilisateurById(int id) {
         return utilisateurRepository.findById(id).orElse(null);
     }
 
@@ -37,7 +37,7 @@ public class UtilisateurService {
     }
 
     public Utilisateur updateUser(int id, Utilisateur updatedUtilisateur) {
-        Utilisateur utilisateurExist = getUserById(id);
+        Utilisateur utilisateurExist = getUtilisateurById(id);
         if(utilisateurExist != null){
             utilisateurRepository.save(updatedUtilisateur);
         }

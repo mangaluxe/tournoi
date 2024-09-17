@@ -37,14 +37,6 @@ public class HomeController {
 
 
 
-    @GetMapping("/about")
-    public String aboutPage(Model model) {
-
-        model.addAttribute("title", "À propos du tournoi");
-
-        return "about";
-    }
-
 
     // ----- Create -----
 

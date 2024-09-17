@@ -45,6 +45,7 @@ public class InscriptionController {
 
         List<Tournoi> tournois = tournoiService.getAllTournois();
 
+        model.addAttribute("title", "Inscription aux tournois"); // Pour le title de la page
         model.addAttribute("tournois", tournois);
         model.addAttribute("inscription", new Inscription());
 
@@ -60,8 +61,8 @@ public class InscriptionController {
         Integer utilisateurId = (Integer) session.getAttribute("pseudo_id"); // Récupérer l'ID de l'utilisateur connecté depuis la session
 
         if (utilisateurId != null) {
-//            Utilisateur utilisateur = utilisateurService.getUtilisateurById(utilisateurId);
-//            inscription.setUtilisateur(utilisateur);
+            Utilisateur utilisateur = utilisateurService.getUtilisateurById(utilisateurId);
+            inscription.setUtilisateur(utilisateur);
 
             if (inscription.getEstEligible() == null) {
                 inscription.setEstEligible(false);
@@ -89,12 +90,35 @@ public class InscriptionController {
     @GetMapping("/inscriptions-tournois")
     public String listeInscriptionsTournois(Model model) {
 
+        model.addAttribute("title", "Toutes les inscription aux tournois"); // Pour le title de la page
+
         List<Inscription> inscriptions = inscriptionService.getAllInscriptions();
 
         model.addAttribute("inscriptions", inscriptions);
 
         return "inscriptions-tournois";
     }
+    
+
+    @GetMapping("/mes-inscriptions")
+    public String mesInscriptionsTournois(HttpSession session, Model model) {
+
+        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id"); // Récupérer l'ID de l'utilisateur connecté depuis la session
+
+        // Vérifier que l'utilisateur est bien connecté
+        if (utilisateurId != null) {
+            List<Inscription> inscriptions = inscriptionService.getInscriptionsByUtilisateurId(utilisateurId); // Récupérer les inscriptions de cet utilisateur
+            model.addAttribute("inscriptions", inscriptions);
+        }
+        else {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("title", "Mes inscriptions aux tournois");
+
+        return "mes-inscriptions";
+    }
+
 
 
     // ----- Delete -----

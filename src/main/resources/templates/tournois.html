@@ -23,7 +23,7 @@
             <li th:each="t : ${tournois}">
                 <div class="e">
                     <div class="topics-box-title-icon icon-gamepad"></div>
-                    <div class="">
+                    <div>
                         <div><a th:href="@{|/tournoi/${t.id}|}"><strong th:text="${t.nom}"></strong></a></div>
                         <div th:text="${t.jeu}"></div>
                     </div>

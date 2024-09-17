@@ -52,6 +52,14 @@ public class InscriptionService {
         return inscriptionRepository.findAll();
     }
 
+
+    /**
+     * Récupérer les inscriptions par utilisateur_id
+     */
+    public List<Inscription> getInscriptionsByUtilisateurId(int utilisateurId) {
+        return inscriptionRepository.findByUtilisateurId(utilisateurId);
+    }
+
     /**
      * Supprimer une inscription
      */
@@ -59,3 +67,4 @@ public class InscriptionService {
         inscriptionRepository.deleteById(id);
     }
 }
+
