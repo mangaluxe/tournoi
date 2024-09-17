@@ -7,7 +7,7 @@
     <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Inscriptions', currentPage='')}"></div>
 
     <main>
-        <h1 class="h1 center">Liste des inscriptions aux tournois</h1>
+        <h1 class="h1 center">Mes prochains tournois</h1>
 
         <ul th:each="i : ${inscriptions}">
             <li>

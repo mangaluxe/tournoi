@@ -38,27 +38,27 @@ public class UtilisateurController {
 //        }
 //    }
 
-//    @RequestMapping("/utilisateurs")
-//    public String showUsers(@RequestParam(name = "search", required = false) String search, Model model) {
-//        if (authService.isLogged()) {
-//            if (search == null) {
-//                model.addAttribute("utilisateurs", utilisateurService.getAllUsers());
-//            } else {
-//                model.addAttribute("utilisateurs", utilisateurService.searchUser(search));
-//            }
-//            return "list";
-//        }
-//        return "index";
-//    }
-//
-//    @RequestMapping("/utilisateur/{id}")
-//    public String showUser(@PathVariable("id") int id, Model model) {
-//        if (authService.isLogged()) {
-//            model.addAttribute("utilisateur", utilisateurService.getUserById(id));
-//            return "detail";
-//        }
-//        return "index";
-//    }
+    @RequestMapping("/utilisateurs")
+    public String showUsers(@RequestParam(name = "search", required = false) String search, Model model) {
+        if (authService.isLogged()) {
+            if (search == null) {
+                model.addAttribute("utilisateurs", utilisateurService.getAllUsers());
+            } else {
+                model.addAttribute("utilisateurs", utilisateurService.searchUser(search));
+            }
+            return "list-utilisateurs";
+        }
+        return "index";
+    }
+
+    @RequestMapping("/utilisateur/{id}")
+    public String showUser(@PathVariable("id") int id, Model model) {
+        if (authService.isLogged()) {
+            model.addAttribute("utilisateur", utilisateurService.getUserById(id));
+            return "detail";
+        }
+        return "index";
+    }
 
 //    @RequestMapping("/delete")
 //    public String deleteUser(@RequestParam("id") int id) {
