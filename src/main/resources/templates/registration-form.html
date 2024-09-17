@@ -8,10 +8,11 @@
 <!--    </form>-->
 <!--</div>-->
 <div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='', currentPage='Inscription')}"></div>
 
     <main>
+
         <h1 class="h1 center">Inscription</h1>
-        <hr>
 
         <form th:action="@{/registration}" method="post" th:object="${utilisateur}">
             <input th:field="*{id}" type="hidden">
@@ -28,7 +29,6 @@
                 <span th:if="${#fields.hasErrors('motdepasse')}" th:errors="*{motdepasse}"></span>
             </div>
 
-
             <div>
                 <label for="email">Email :</label>
                 <input type="text" id="email" th:field="*{email}">
@@ -40,6 +40,7 @@
                 <a th:href="@{/}">Retour</a>
             </div>
         </form>
+
     </main>
 
 </div>

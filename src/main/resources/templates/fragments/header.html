@@ -97,32 +97,31 @@
                     </div>
                 </div>
 
-<!--                <div th:if="${isLogged == true}">-->
-<!--                    <a href="javascript:void(0)" class="icon-user" id="profil-drop"><span class="txt"><span th:text="${session.username}">Pseudo</span></span></a>-->
-<!--                    <div class="profil-dropdown">-->
-<!--                        <div class="profil-dropdown-menu">-->
-<!--                            <a th:href="@{/logout}" rel="nofollow"><span class="icon-exit"></span>Déconnexion</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="profil-overlay"></div>-->
-<!--                </div>-->
-
-<!--                <div th:if="${isLogged != true}">-->
-<!--                    <a href="javascript:void(0)" class="icon-user open-connect"><span class="txt">Connexion</span></a>-->
-<!--                </div>-->
-
-                <div>
-                    <a href="javascript:void(0)"  th:if="${session.login == null}" class="icon-user open-connect"><span class="txt">Connexion</span></a>
-                    <a href="/logout" th:if="${session.login != null}" class="icon-user open-connect"><span class="txt">Se déconnecter</span></a>
-<!--                    <a class="btn btn-primary" th:if="${session.login == null}" href="/login">Connexion</a>-->
-
+                <div th:if="${session.login != null}">
+                    <a href="javascript:void(0)" class="icon-user" id="profil-drop"><span class="txt"><span th:text="${session.pseudo}">Pseudo</span></span></a>
+                    <div class="profil-dropdown">
+                        <div class="profil-dropdown-menu">
+                            <a th:href="@{/logout}" rel="nofollow"><span class="icon-exit"></span>Déconnexion</a>
+                        </div>
+                    </div>
+                    <div class="profil-overlay"></div>
                 </div>
+
+                <div th:if="${session.login == null}">
+                    <a href="javascript:void(0)" class="icon-user open-connect"><span class="txt">Connexion</span></a>
+                </div>
+
+<!--                <div>-->
+<!--                    <a href="javascript:void(0)"  th:if="${session.login == null}" class="icon-user open-connect"><span class="txt">Connexion</span></a>-->
+<!--                    <a href="/logout" th:if="${session.login != null}" class="icon-user open-connect"><span class="txt">Se déconnecter</span></a>-->
+<!--&lt;!&ndash;                    <a class="btn btn-primary" th:if="${session.login == null}" href="/login">Connexion</a>&ndash;&gt;-->
+
+<!--                </div>-->
 
             </div>
         </div>
     </header>
 
-     Message flash
     <div th:if="${successMessage}" class="warning b center">
         <p th:text="${successMessage}"></p>
     </div>

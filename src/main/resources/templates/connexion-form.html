@@ -1,8 +1,12 @@
 <div th:replace="~{fragments/header :: headerImports}"></div>
 
 <div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='', currentPage='Connexion')}"></div>
+
     <main>
-        <h1>Connexion</h1>
+
+        <h1 class="center h1">Connexion</h1>
+
         <form th:action="@{/login}" method="post">
             <div class="mb-3">
                 <label for="pseudo" class="form-label">Pseudo</label>
@@ -15,6 +19,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Se connecter</button>
         </form>
+
     </main>
 
 </div>
