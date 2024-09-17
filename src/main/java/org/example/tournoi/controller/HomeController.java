@@ -30,7 +30,7 @@ public class HomeController {
     @GetMapping("/") // URL : http://localhost:8080/
     public String home(Model model) {
 
-        model.addAttribute("title", "Tournoi - Bienvenue au tournoi !"); // Pour le title de la page
+        model.addAttribute("title", "Tournoi Battle Arena"); // Pour le title de la page
 
         return "index"; // Renvoie le nom de la vue "index" pour la page d'accueil
     }

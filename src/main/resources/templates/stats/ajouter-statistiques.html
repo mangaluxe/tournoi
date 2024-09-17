@@ -1,0 +1,55 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+
+<div class="container">
+
+    <main>
+
+        <h1 class="h1 center">Ajouter résultats</h1>
+
+        <form th:action="@{/stats/ajouter}" th:object="${statistiques}" method="post">
+
+            <div>
+                <label for="utilisateur">Joueur :</label>
+                <div class="select-container">
+                    <select id="utilisateur" name="utilisateur.id" required>
+                        <option value="" disabled selected>Sélectionner un joueur</option>
+                        <option th:each="utilisateur : ${utilisateurs}"
+                                th:value="${utilisateur.id}"
+                                th:text="${utilisateur.pseudo}">Joueur</option>
+                    </select>
+                    <div class="arrow-down"></div>
+                </div>
+            </div>
+
+            <div>
+                <label for="score">Score :
+                    <input type="number" id="score" name="score" th:field="*{score}" required>
+                </label>
+            </div>
+
+            <div>
+                <label for="victoires">Victoires :
+                    <input type="number" id="victoires" name="victoires" th:field="*{victoires}" required>
+                </label>
+            </div>
+
+            <div>
+                <label for="defaites">Défaites :
+                    <input type="number" id="defaites" name="defaites" th:field="*{defaites}" required>
+                </label>
+            </div>
+
+            <button type="submit" class="btn">Ajouter</button>
+        </form>
+
+    </main>
+
+</div>
+
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>

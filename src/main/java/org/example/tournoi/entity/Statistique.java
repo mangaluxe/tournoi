@@ -10,21 +10,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class StatistiquesJoueur {
+public class Statistique {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int matchsJoues;
+    private int score;  // Score ou nombre de points obtenus par le joueur
 
-    private int matchsGagnes;
+    private int victoires;  // Nombre de victoires
 
-    private int tournoisJoues;
-
-    private int tournoisGagnes;
-
-    private double tauxVictoire; // Calculé automatiquement (matchs gagnés / matchs joués)
+    private int defaites;   // Nombre de défaites
 
     // ---------- Relations ----------
 

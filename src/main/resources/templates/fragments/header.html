@@ -57,8 +57,21 @@
                                 <div class="dropdown-content">
                                     <ul class="ul-2">
                                         <li><a th:href="@{/inscription-tournoi/nouveau}">Rejoindre un tournoi</a></li>
-                                        <li><a th:href="@{/inscriptions-tournois}">Toutes les inscriptions</a></li>
                                         <li><a th:href="@{/mes-inscriptions}">Mes inscriptions</a></li>
+                                        <li><a th:href="@{/inscriptions-tournois}">Toutes les inscriptions</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="dropdown">
+                                <div>
+                                    <span class="drop-a">Résultats</span>
+                                    <div class="open-submenu"></div>
+                                </div>
+                                <div class="dropdown-content">
+                                    <ul class="ul-2">
+                                        <li><a th:href="@{/stats/liste}">Voir</a></li>
+                                        <li><a th:href="@{/stats/ajouter}">Ajouter</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -105,7 +118,6 @@
                             <div class="h4 mb-0">Recherche</div>
                         </div>
                         <form th:action="@{/recherche}" method="get" class="search">
-<!--                        <form action="" method="get" class="search">-->
                             <input type="search" name="recherche">
                             <button type="submit" class="submit"><span class="icon-search"></span></button>
                         </form>

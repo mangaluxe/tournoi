@@ -17,12 +17,14 @@
                 <div>Vous : <span th:text="${session.pseudo}">Pseudo</span> (pseudo_id : <span th:text="${session.pseudo_id}"></span>)</div>
 
                 <div>
-                    <label for="tournoi">Tournoi :
+                    <label for="tournoi">Tournoi :</label>
+                    <div class="select-container">
                         <select id="tournoi" name="tournoi.id" class="form-control" required>
                             <option value="" disabled selected>Sélectionner un tournoi</option>
                             <option th:each="tournoi : ${tournois}" th:value="${tournoi.id}" th:text="${tournoi.nom}"></option>
                         </select>
-                    </label>
+                        <div class="arrow-down"></div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn">Inscrire</button>

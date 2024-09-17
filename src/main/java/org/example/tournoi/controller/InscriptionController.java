@@ -96,6 +96,11 @@ public class InscriptionController {
 
         model.addAttribute("inscriptions", inscriptions);
 
+        // Formater les dates pour chaque tournoi associé aux inscriptions
+        inscriptions.forEach(i -> {
+            i.getTournoi().formatDates();
+        });
+
         return "inscriptions-tournois";
     }
 
@@ -111,7 +116,17 @@ public class InscriptionController {
         // Vérifier que l'utilisateur est bien connecté
         if (utilisateurId != null) {
             List<Inscription> inscriptions = inscriptionService.getInscriptionsByUtilisateurId(utilisateurId); // Récupérer les inscriptions de cet utilisateur
-            model.addAttribute("inscriptions", inscriptions);
+
+            if (inscriptions != null) {
+                // Formater les dates pour chaque tournoi associé aux inscriptions
+                inscriptions.forEach(i -> {
+                    if (i.getTournoi() != null) {
+                        i.getTournoi().formatDates();
+                    }
+                });
+
+                model.addAttribute("inscriptions", inscriptions);
+            }
         }
         else {
             return "redirect:/login";
@@ -121,6 +136,7 @@ public class InscriptionController {
 
         return "mes-inscriptions";
     }
+
 
 
     /**

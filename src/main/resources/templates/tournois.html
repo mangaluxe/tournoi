@@ -29,7 +29,8 @@
                     </div>
                 </div>
                 <div class="e center-center">
-                    <span th:text="${t.getDateDebut()}"></span>
+<!--                    <span th:text="${t.getDateDebut()}"></span>-->
+                    <span th:text="${t.dateDebutFormatted}"></span>
                 </div>
                 <div class="e center-center">
                     <a th:href="@{|/tournoi/${t.id}/modifier|}" class="mini-btn">Modifier<span class="icon-pencil"></span></a>

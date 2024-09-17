@@ -17,11 +17,13 @@
                     <label for="nom">Nom du Tournoi :
                         <input type="text" id="nom" th:field="*{nom}">
                     </label>
+                    <p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="i warning"></p>
                 </div>
                 <div>
                     <label for="jeu">Jeu :
                         <input type="text" id="jeu" th:field="*{jeu}">
                     </label>
+                    <p th:if="${#fields.hasErrors('jeu')}" th:errors="*{jeu}" class="i warning"></p>
                 </div>
                 <div>
                     <label for="format">Format :
@@ -32,6 +34,7 @@
                     <label for="regles">Règles :
                         <textarea id="regles" th:field="*{regles}"></textarea>
                     </label>
+                    <p th:if="${#fields.hasErrors('regles')}" th:errors="*{regles}" class="i warning"></p>
                 </div>
                 <div>
                     <label for="max_joueurs">Max Joueurs :
@@ -42,11 +45,13 @@
                     <label for="date_debut">Date et heure de Début :
                         <input type="datetime-local" id="date_debut" th:field="*{dateDebut}">
                     </label>
+                    <p th:if="${#fields.hasErrors('dateDebut')}" th:errors="*{dateDebut}" class="i warning"></p>
                 </div>
                 <div>
                     <label for="date_fin">Date et heure de Fin :
                         <input type="datetime-local" id="date_fin" th:field="*{dateFin}">
                     </label>
+                    <p th:if="${#fields.hasErrors('dateFin')}" th:errors="*{dateFin}" class="i warning"></p>
                 </div>
                 <div>
                     <button type="submit" class="btn">Créer</button>

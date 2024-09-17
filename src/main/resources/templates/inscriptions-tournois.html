@@ -29,7 +29,8 @@
                     <span th:text="${i.tournoi.nom}"></span>
                 </div>
                 <div class="e center-center">
-                    <span th:text="${i.tournoi.dateDebut}"></span>
+<!--                    <span th:text="${i.tournoi.dateDebut}"></span>-->
+                    <span th:text="${i.tournoi.dateDebutFormatted}"></span>
                 </div>
                 <div class="e center-center">
                     <form class="mb-0" th:action="@{|/inscription-tournoi/${i.id}/supprimer|}" method="post" onsubmit="return confirm('Supprimer cette inscription ?');">

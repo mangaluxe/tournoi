@@ -1,9 +1,11 @@
 package org.example.tournoi.controller;
 
+import jakarta.validation.Valid;
 import org.example.tournoi.entity.Tournoi;
 import org.example.tournoi.service.TournoiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -37,6 +39,9 @@ public class TournoiController {
 
         List<Tournoi> tournois = tournoiService.getAllTournois();
 
+        // Formater les dates pour chaque tournoi
+        tournois.forEach(t -> t.formatDates());
+
         model.addAttribute("title", "Liste des tournois"); // Pour le title de la page
         model.addAttribute("tournois", tournois);
 
@@ -45,6 +50,7 @@ public class TournoiController {
 
         return "tournois";
     }
+
 
     /**
      * Afficher un tournoi
@@ -74,16 +80,25 @@ public class TournoiController {
     public String formulaireCreationTournoi(Model model) {
         Tournoi tournoi = new Tournoi(); // Un tournoi vide pour le formulaire
         model.addAttribute("tournoi", tournoi);
-        return "creer-tournoi";
+        return "creer-tournoi"; // Attention : indiquer nom du fichier html uniquement, ne marche pas avec nom de route
     }
 
     /**
      * Créer tournoi
      */
     @PostMapping("/tournoi/nouveau")
-    public String creerTournoi(@ModelAttribute("tournoi") Tournoi tournoi) {
-        tournoiService.creerTournoi(tournoi); // Sauvegarder le nouveau tournoi
-        return "redirect:/tournois";
+    public String creerTournoi(@Valid @ModelAttribute("tournoi") Tournoi tournoi, BindingResult bindingResult, Model model) {
+
+        // --- Validation de formulaire ---
+        if (bindingResult.hasErrors()) { // BindingResult capture les erreurs de validation
+            model.addAttribute("tournoi", tournoi); // Si erreurs de validation, on retourne le formulaire avec les messages d'erreur
+            return "creer-tournoi"; // Si erreurs de validation, retour au formulaire. 💡 Attention : indiquer nom du fichier html uniquement, ne marche pas avec nom de route
+        }
+        // --- ---
+
+        tournoiService.creerTournoi(tournoi);
+
+        return "redirect:/tournois"; // 💡 Attention : avec redirect, c'est nom du chemin qu'il faut indiquer, et non le html
     }
 
 
@@ -93,7 +108,7 @@ public class TournoiController {
      * Formulaire pour modifier un tournoi
      */
     @GetMapping("/tournoi/{id}/modifier")
-    public String formulaireModifierTournoi(@PathVariable("id") int id, Model model) {
+    public String formulaireModifierTournoi(@Valid @PathVariable("id") int id, Model model) {
         Tournoi tournoi = tournoiService.getTournoiById(id);
 
         if (tournoi != null) {
