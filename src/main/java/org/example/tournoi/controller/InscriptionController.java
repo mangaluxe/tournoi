@@ -120,7 +120,21 @@ public class InscriptionController {
     }
 
 
-
+//    @GetMapping("/inscription/{id}")
+//    public String monInscriptionTournoi(@PathVariable("id") int id, HttpSession session, Model model) {
+//
+//        Inscription inscription = inscriptionService.getInscriptionById(id);
+//
+//        if (inscription != null) {
+//            model.addAttribute("inscription", inscription);
+//            model.addAttribute("title", "Mon inscription"; // Pour le title de la page
+//            return "mon-inscription";
+//        }
+//        else {
+//            return "error/404";
+//        }
+//
+//    }
 
 
     // ----- Delete -----
