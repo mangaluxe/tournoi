@@ -26,8 +26,6 @@ public class Message {
 
     private LocalDateTime dateEnvoi; // Date et heure d'envoi du message
 
-    private boolean estLu; // Indique si le message a été lu ou non
-
 
     // ---------- Relations ----------
 
