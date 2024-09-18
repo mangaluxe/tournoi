@@ -65,7 +65,7 @@ public class AuthController {
 //    }
 
 
-    //PostMapping en prenant en comptant la gestion des rôles
+    //PostMapping en prenant en compte la gestion des rôles
     @PostMapping("/login")
     public String connexionForm(@ModelAttribute("pseudo") String pseudo, @ModelAttribute("motdepasse") String motdepasse, RedirectAttributes redirectAttributes) {
         boolean connected = authService.login(pseudo, motdepasse);
