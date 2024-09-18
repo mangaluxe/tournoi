@@ -8,13 +8,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class MessageService {
+
+    // ========== Propriétés ==========
+
     private final MessageRepository messageRepository;
+
+
+    // ========== Constructeur ==========
 
     public MessageService(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
+
+
+    // ========== Méthodes ==========
 
     public void saveMessage(Message message) {
         messageRepository.save(message);
