@@ -43,7 +43,7 @@
                         <div>Menu</div>
                     </div>
                 </div>
-                <a th:href="@{/}" class="logo"><img th:src="@{/assets/img/logo.png}" alt="Page d'accueil"></a>
+                <a th:href="@{/}" class="logo"><img th:src="@{/assets/img/logo-nav.png}" alt="Page d'accueil" width="100"></a>
 
                 <div id="my_overlay" class="my-overlay">
                     <nav class="nav-icon">
@@ -70,9 +70,8 @@
                                 </div>
                                 <div class="dropdown-content">
                                     <ul class="ul-2">
-                                        <li><a>--------</a></li>
-<!--                                        <li><a th:href="@{/stats/liste}">Voir</a></li>-->
-<!--                                        <li><a th:href="@{/stats/ajouter}">Ajouter</a></li>-->
+                                        <li><a th:href="@{/stats}">Voir</a></li>
+                                        <li><a th:href="@{/stats/ajouter}">Ajouter</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -97,9 +96,9 @@
                                 </div>
                                 <div class="dropdown-content">
                                     <ul class="ul-2">
-                                        <li><a href="#">Règlement</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                        <li><a href="#">Infos légales</a></li>
+                                        <li><a th:href="@{/reglement}">Règlement</a></li>
+                                        <li><a th:href="@{/motdepasse-oublie}">Récupération de mot de passe</a></li>
+                                        <li><a th:href="@{/mentions-legales}">Mentions légales</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -129,8 +128,7 @@
                     <a href="javascript:void(0)" class="icon-user" id="profil-drop"><span class="txt"><span th:text="${session.pseudo}">Pseudo</span></span></a>
                     <div class="profil-dropdown">
                         <div class="profil-dropdown-menu">
-                            <a href="#" rel="nofollow">Espace Membre</a>
-                            <a href="#" rel="nofollow">Profil public</a>
+                            <a th:href="@{/espace-membre}" rel="nofollow">Espace membre</a>
                             <a th:href="@{/logout}" rel="nofollow"><span class="icon-exit"></span>Déconnexion</a>
                         </div>
                     </div>

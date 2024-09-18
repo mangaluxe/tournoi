@@ -27,6 +27,8 @@ public class AuthService {
     public Utilisateur register(Utilisateur utilisateur) {
         Role role = roleRepository.findByNomRole("USER"); // Attribution du rôle USER par défaut
         utilisateur.setRole(role);
+        // Pour Eviter que l'ID soit manipulé . La BDD générera automatiquement un ID unique pour le nouvel utilisateur
+        utilisateur.setId(0);
         return utilisateurRepository.save(utilisateur);
     }
 
@@ -41,7 +43,7 @@ public class AuthService {
 //    }
 
     public boolean login(String pseudo, String motdepasse) {
-        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
+        Utilisateur utilisateur = utilisateurRepository.findByPseudoIgnoreCase(pseudo);
 
         // Vérifie si l'utilisateur est trouvé
         if (utilisateur == null) {

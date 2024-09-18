@@ -34,7 +34,8 @@ public class Tournoi {
     @MyValid(message = "Gros mots interdits") // Validation personnalisée
     private String regles;
 
-    private int maxJoueurs;
+    @NotNull(message = "Nb max joueurs obligatoire")
+    private Integer maxJoueurs;
 
     @NotNull(message = "Datetime de début du tournoi obligatoire") // 💡 @NotBlank ne marche pas avec Date, il faut utiliser @NotNull
     private LocalDateTime dateDebut; // Datetime de début du tournoi

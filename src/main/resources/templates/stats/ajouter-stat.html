@@ -26,20 +26,23 @@
 
             <div>
                 <label for="score">Score :
-                    <input type="number" id="score" name="score" th:field="*{score}" required>
+                    <input type="number" id="score" name="score" th:field="*{score}">
                 </label>
+                <p th:if="${#fields.hasErrors('score')}" th:errors="*{score}" class="i warning"></p>
             </div>
 
             <div>
                 <label for="victoires">Victoires :
-                    <input type="number" id="victoires" name="victoires" th:field="*{victoires}" required>
+                    <input type="number" id="victoires" name="victoires" th:field="*{victoires}">
                 </label>
+                <p th:if="${#fields.hasErrors('victoires')}" th:errors="*{victoires}" class="i warning"></p>
             </div>
 
             <div>
                 <label for="defaites">Défaites :
-                    <input type="number" id="defaites" name="defaites" th:field="*{defaites}" required>
+                    <input type="number" id="defaites" name="defaites" th:field="*{defaites}">
                 </label>
+                <p th:if="${#fields.hasErrors('defaites')}" th:errors="*{defaites}" class="i warning"></p>
             </div>
 
             <button type="submit" class="btn">Ajouter</button>

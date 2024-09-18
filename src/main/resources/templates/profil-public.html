@@ -1,0 +1,26 @@
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+<div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='', currentPage='Connexion')}"></div>
+
+    <main>
+
+        <h1>Mon profil</h1>
+        <div class="col justify-content-center" th:if="${utilisateur != null}">
+            <p>Pseudo : <span th:text="${utilisateur.getPseudo()}"></span></p>
+            <p>Prénom : <span th:text="${utilisateur.getPrenom()}"></span></p>
+            <p>Nom : <span th:text="${utilisateur.getNom()}"></span></p>
+            <p>Âge : <span th:text="${utilisateur.getDateNaissance()}"></span></p>
+            <p>Email : <span th:text="${utilisateur.getEmail()}"></span></p>
+        </div>
+        <div th:if="${utilisateur.isEmpty()}">
+            <p>Aucun utilisateur trouvé !</p>
+        </div>
+
+
+    </main>
+
+</div>
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>
