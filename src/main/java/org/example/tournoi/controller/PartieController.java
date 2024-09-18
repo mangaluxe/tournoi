@@ -36,7 +36,7 @@
 //    public String listerParties(Model model) {
 //        List<Partie> parties = partieService.getAllParties();
 //        model.addAttribute("parties", parties);
-//        return "parties";
+//        return "match/parties";
 //    }
 //
 //    /**
@@ -47,7 +47,7 @@
 //        Partie partie = partieService.getPartieById(id);
 //        if (partie != null) {
 //            model.addAttribute("partie", partie);
-//            return "detail-partie";
+//            return "match/partie";
 //        }
 //        return "error/404";
 //    }
@@ -65,7 +65,7 @@
 ////        List<Utilisateur> joueurs = utilisateurService.getAllUtilisateurs();
 ////        model.addAttribute("joueurs", joueurs);
 //
-//        return "creer-partie";
+//        return "match/creer-partie";
 //    }
 //
 //
@@ -92,7 +92,7 @@
 ////            List<Utilisateur> joueurs = utilisateurService.getAllUtilisateurs();
 ////            model.addAttribute("joueurs", joueurs);
 //
-//            return "creer-partie"; // Réutilise le même formulaire que la création
+//            return "match/creer-partie"; // Réutilise le même formulaire que la création
 //        }
 //        return "error/404";
 //    }

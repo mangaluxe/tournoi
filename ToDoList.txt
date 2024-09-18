@@ -1,11 +1,19 @@
-﻿BDD :
+﻿Jour 1 - BDD :
 
 - Diagramme : Nicolas
 - Merise : Rémi
 - Entity : Haiou
 
-Controller/Service/Dao :
+Jour 2 - Controller/Service/Dao :
 
-- Utilisateur : Rémi
-- Tournoi : Haiou
+- Utilisateur/Role : Rémi
+- Tournoi/Inscription aux tournois : Haiou
 - Message : Nicolas
+
+Jour 3 :
+
+- Espace membre : Rémi
+- Résultats : Haiou
+- Message à finir (update, delete)
+
+Pour tout le monde : Mise en page, Validation, validation personnalisée (censure).

@@ -798,23 +798,24 @@ a .txt {
     border-radius: 5px;
 }
 
-.profil-dropdown-menu > a {
+.profil-dropdown-menu a {
     color: var(--black) !important;
     border-radius: 0 !important;
     padding: 9px 12px !important;
     cursor: pointer;
     font: .8em sans-serif;
     transition: 0.2s ease;
+    display: block !important;
 }
-.profil-dropdown-menu > a:hover {
+.profil-dropdown-menu a:hover {
     color: var(--white) !important;
     background-color: var(--blue5) !important;
 }
-.profil-dropdown-menu > a:not(:last-child) {
+.profil-dropdown-menu a:not(:last-child) {
     border-bottom: solid 1px #B9B9B9 !important;
 }
 
-#profil-drop > span {
+#profil-drop span {
     max-width: 99px;
     overflow: hidden;
 }

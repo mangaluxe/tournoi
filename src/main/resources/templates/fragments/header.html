@@ -70,8 +70,9 @@
                                 </div>
                                 <div class="dropdown-content">
                                     <ul class="ul-2">
-                                        <li><a th:href="@{/stats/liste}">Voir</a></li>
-                                        <li><a th:href="@{/stats/ajouter}">Ajouter</a></li>
+                                        <li><a>--------</a></li>
+<!--                                        <li><a th:href="@{/stats/liste}">Voir</a></li>-->
+<!--                                        <li><a th:href="@{/stats/ajouter}">Ajouter</a></li>-->
                                     </ul>
                                 </div>
                             </li>
@@ -128,6 +129,8 @@
                     <a href="javascript:void(0)" class="icon-user" id="profil-drop"><span class="txt"><span th:text="${session.pseudo}">Pseudo</span></span></a>
                     <div class="profil-dropdown">
                         <div class="profil-dropdown-menu">
+                            <a href="#" rel="nofollow">Espace Membre</a>
+                            <a href="#" rel="nofollow">Profil public</a>
                             <a th:href="@{/logout}" rel="nofollow"><span class="icon-exit"></span>Déconnexion</a>
                         </div>
                     </div>
