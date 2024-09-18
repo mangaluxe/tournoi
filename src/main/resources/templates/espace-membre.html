@@ -1,28 +1,29 @@
 <div th:replace="~{fragments/header :: headerImports}"></div>
 
+
 <div class="container">
     <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='', currentPage='Mon Espace')}"></div>
 
     <main>
 
-        <h1>Mes informations personnelles</h1>
-        <div th:if="${utilisateur != null}">
-            <p>Pseudo : <span th:text="${utilisateur.getPseudo()}"></span></p>
-            <p>Nom : <span th:text="${utilisateur.getNom()}"></span></p>
-            <p>Prénom : <span th:text="${utilisateur.getPrenom()}"></span></p>
-            <p>Date de naissance : <span th:text="${utilisateur.getDateNaissance()}"></span></p>
-            <p>Email : <span th:text="${utilisateur.getEmail()}"></span></p>
+        <h1 class="h1 center">Mes informations personnelles</h1>
 
-            <br>
-<!--            <a th:href="@{/delete(utilisateurId=${utilisateur.getId()})}" class="btn btn-danger">Supprimer</a>-->
-            <a th:href="@{/update(utilisateurId=${utilisateur.getId()})}" class="btn btn-info">Modifier</a>
+        <div th:if="${utilisateur != null}" class="box">
+            <div class="box-title"><span th:text="${utilisateur.getPseudo()}"></span></div>
+            <div class="box-padding">
+                <p>Nom : <span th:text="${utilisateur.getNom()}"></span></p>
+                <p>Prénom : <span th:text="${utilisateur.getPrenom()}"></span></p>
+                <p>Date de naissance : <span th:text="${utilisateur.getDateNaissance()}"></span></p>
+                <p>Email : <span th:text="${utilisateur.getEmail()}"></span></p>
+            </div>
+            <div class="forum-box-foot">
+                <a th:href="@{/update(utilisateurId=${utilisateur.getId()})}" class="mini-btn">Modifier</a>
+            </div>
         </div>
-
-
 
     </main>
 
 </div>
 
-<!-- Inclusion du footer -->
+
 <div th:replace="~{fragments/footer :: footerImports}"></div>

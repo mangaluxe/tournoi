@@ -10,7 +10,7 @@
         <h2 class="h-box-shadow">Formulaire de saisie</h2>
 
         <div class="box-padding">
-            <p>Utilisateur: <span th:text="${session.get('pseudo')}"></span></p>
+            <p>Utilisateur : <span th:text="${session.get('pseudo')}"></span></p>
 
             <form th:action="@{/messages/add}" th:object="${message}" method="post">
 
