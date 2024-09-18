@@ -1,9 +1,11 @@
 package org.example.tournoi.controller;
 
+import jakarta.validation.Valid;
 import org.example.tournoi.entity.Utilisateur;
 import org.example.tournoi.service.AuthService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,15 +37,30 @@ public class AuthController {
         return "index";
     }
 
+//    @PostMapping("/registration")
+//    public String inscriptionForm(@ModelAttribute("utilisateur") Utilisateur utilisateur, Model model, RedirectAttributes redirectAttributes) {
+//        try {
+//            authService.register(utilisateur);
+//            redirectAttributes.addFlashAttribute("successMessage", "Inscription réussie ! Vous pouvez maintenant vous connecter."); // Message flash
+//            return "redirect:/";
+//        } catch (IllegalArgumentException e) {
+//            model.addAttribute("error", e.getMessage());
+//            return "registration-form";
+//        }
+//    }
+
     @PostMapping("/registration")
-    public String inscriptionForm(@ModelAttribute("utilisateur") Utilisateur utilisateur, Model model, RedirectAttributes redirectAttributes) {
+    public String inscriptionForm(@ModelAttribute("utilisateur") @Valid Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return "registration-form";
+        }
         try {
             authService.register(utilisateur);
-            redirectAttributes.addFlashAttribute("successMessage", "Inscription réussie ! Vous pouvez maintenant vous connecter."); // Message flash
+            redirectAttributes.addFlashAttribute("successMessage", "Inscription réussie ! Vous pouvez maintenant vous connecter.");
             return "redirect:/";
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            return "registration-form";
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/registration";
         }
     }
 

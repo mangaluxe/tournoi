@@ -91,8 +91,6 @@ public class UtilisateurController {
     }
 
 
-
-
 //    @RequestMapping("/mon-espace/{id}")
 //    public String showStudent(@PathVariable("id") int id, Model model) {
 //        if (authService.isLogged()) {

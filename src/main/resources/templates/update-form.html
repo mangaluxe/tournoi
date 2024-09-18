@@ -12,8 +12,8 @@
 
             <div>
                 <label for="pseudo">Nom d'utilisateur:</label>
-                <input type="text" id="pseudo" th:field="*{pseudo}">
-                <span th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></span>
+                <input type="text" id="pseudo" th:field="*{pseudo}" readonly>
+
             </div>
 
             <div>

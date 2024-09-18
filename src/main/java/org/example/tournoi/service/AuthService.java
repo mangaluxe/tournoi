@@ -7,6 +7,7 @@ import org.example.tournoi.dao.UtilisateurRepository;
 import org.example.tournoi.entity.Role;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,12 +26,19 @@ public class AuthService {
     }
 
     public Utilisateur register(Utilisateur utilisateur) {
+        if (utilisateurRepository.existsByPseudo(utilisateur.getPseudo())) {
+            throw new IllegalArgumentException("Ce pseudo est déjà utilisé, veuillez en choisir un autre.");
+        }
         Role role = roleRepository.findByNomRole("USER"); // Attribution du rôle USER par défaut
         utilisateur.setRole(role);
         // Pour Eviter que l'ID soit manipulé . La BDD générera automatiquement un ID unique pour le nouvel utilisateur
         utilisateur.setId(0);
+
         return utilisateurRepository.save(utilisateur);
+
+
     }
+
 
 //    public boolean login(String pseudo, String motdepasse) {
 //        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);

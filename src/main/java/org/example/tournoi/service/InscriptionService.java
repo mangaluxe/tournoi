@@ -65,6 +65,7 @@ public class InscriptionService {
     public void creerInscription(Inscription inscription) {
         inscriptionRepository.save(inscription);
     }
+
 //    public void creerInscription(Inscription inscription) {
 //        Utilisateur utilisateur = utilisateurService.getUtilisateurById(inscription.getUtilisateur().getId());
 //        Tournoi tournoi = tournoiService.getTournoiById(inscription.getTournoi().getId());
