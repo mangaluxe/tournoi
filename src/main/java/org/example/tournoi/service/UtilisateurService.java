@@ -40,14 +40,32 @@ public class UtilisateurService {
         return utilisateurRepository.findById(id).orElse(null);
     }
 
+    public Utilisateur findByPseudo(String pseudo) {
+        return utilisateurRepository.findByPseudo(pseudo);
+    }
+
     public void deleteUser(int id) {
         utilisateurRepository.deleteById(id);
     }
 
+//    public Utilisateur updateUser(int id, Utilisateur updatedUtilisateur) {
+//        Utilisateur utilisateurExist = getUtilisateurById(id);
+//        if(utilisateurExist != null){
+//            utilisateurRepository.save(updatedUtilisateur);
+//        }
+//        return utilisateurExist;
+//    }
+
     public Utilisateur updateUser(int id, Utilisateur updatedUtilisateur) {
         Utilisateur utilisateurExist = getUtilisateurById(id);
-        if(utilisateurExist != null){
-            utilisateurRepository.save(updatedUtilisateur);
+        if (utilisateurExist != null) {
+            utilisateurExist.setPseudo(updatedUtilisateur.getPseudo());
+            utilisateurExist.setMotdepasse(updatedUtilisateur.getMotdepasse());
+            utilisateurExist.setNom(updatedUtilisateur.getNom());
+            utilisateurExist.setPrenom(updatedUtilisateur.getPrenom());
+            utilisateurExist.setEmail(updatedUtilisateur.getEmail());
+            utilisateurExist.setDateNaissance(updatedUtilisateur.getDateNaissance());
+            utilisateurRepository.save(utilisateurExist);
         }
         return utilisateurExist;
     }
