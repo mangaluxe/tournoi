@@ -14,6 +14,6 @@ Jour 3 :
 
 - Espace membre : Rémi
 - Résultats : Haiou
-- Message à finir (update, delete)
+- Message à finir (update, delete)/Diagramme à mettre à jour : Nicolas
 
 Pour tout le monde : Mise en page, Validation, validation personnalisée (censure).
