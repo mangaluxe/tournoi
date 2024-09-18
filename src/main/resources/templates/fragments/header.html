@@ -128,9 +128,7 @@
                     <a href="javascript:void(0)" class="icon-user" id="profil-drop"><span class="txt"><span th:text="${session.pseudo}">Pseudo</span></span></a>
                     <div class="profil-dropdown">
                         <div class="profil-dropdown-menu">
-<!--                            <a href="#" rel="nofollow">Espace Membre</a>-->
-                            <a th:href="@{/espace-membre}">Espace membre</a>
-                            <a href="#" rel="nofollow">Profil public</a>
+                            <a th:href="@{/espace-membre}" rel="nofollow">Espace membre</a>
                             <a th:href="@{/logout}" rel="nofollow"><span class="icon-exit"></span>Déconnexion</a>
                         </div>
                     </div>
