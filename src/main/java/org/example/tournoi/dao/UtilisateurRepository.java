@@ -12,4 +12,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Intege
     Optional<Utilisateur> findByEmailAndPseudo(String email, String pseudo);
 
     Utilisateur findByPseudoIgnoreCase(String pseudo);
+
+    // Vérifier si un utilisateur existe déjà (lors de l'inscription)
+    boolean existsByPseudo(String pseudo);
 }

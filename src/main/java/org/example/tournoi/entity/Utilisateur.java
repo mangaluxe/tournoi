@@ -27,6 +27,7 @@ public class Utilisateur {
 
     @NotBlank(message = "Pseudo obligatoire")
     @Size(min = 3, message = "Minimum 3 caractères")
+    @Column(unique = true)
     private String pseudo;
 
     @NotBlank(message = "Mot de passe obligatoire")
