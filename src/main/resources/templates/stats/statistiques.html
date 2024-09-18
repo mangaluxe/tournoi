@@ -14,6 +14,7 @@
         <div class="e b">Score</div>
         <div class="e b">Victoires</div>
         <div class="e b">Défaites</div>
+        <div class="e b">Ratio Victoires/Défaites</div>
     </div>
     <ul class="table-list topics-box">
         <li th:each="stat, iterStat : ${statistiques}">
@@ -32,6 +33,9 @@
             <div class="e center-center">
                 <span th:text="${stat.defaites}"></span>
             </div>
+            <div class="e center-center">
+                <span th:text="${stat.ratioVictoiresDefaites}"></span>
+            </div>
         </li>
     </ul>
 
@@ -43,6 +47,7 @@
         <div class="e b">Score</div>
         <div class="e b">Victoires</div>
         <div class="e b">Défaites</div>
+        <div class="e b">Ratio Victoires/Défaites</div>
     </div>
     <ul class="table-list topics-box">
         <li th:each="s : ${statistiques}">
@@ -60,6 +65,9 @@
             </div>
             <div class="e center-center">
                 <span th:text="${s.defaites}"></span>
+            </div>
+            <div class="e center-center">
+                <span th:text="${s.ratioVictoiresDefaites}"></span>
             </div>
         </li>
     </ul>

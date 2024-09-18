@@ -35,4 +35,11 @@ public class Statistique {
     @JoinColumn(name = "utilisateur_id", nullable = false) // Crée une colonne utilisateur_id sur la table 'statistiques_joueur'
     private Utilisateur utilisateur;
 
+
+    // ---------- @Transient : Ce qu'on ne persiste pas en BDD ----------
+
+    @Transient
+    private double ratioVictoiresDefaites;
+
 }
+//
