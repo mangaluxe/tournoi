@@ -1,19 +1,23 @@
 <div th:replace="~{fragments/header :: headerImports}"></div>
 
-
+<!--adapter le fil d'ariane pour l'accès à la messagerie-->
 <div class="container">
-    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Créer message')}"></div>
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournoi', currentPage='Créer message')}"></div>
 
     <main>
+        <p class="mt-5"><a th:href="@{/}">Retour à la page d'accueil</a></p>
 
-        <h1 class="h1 center">Boîte de réception</h1>
+        <h1 class="h1 center">Messagerie</h1>
 
-        <div th:each="message : ${messages}">
-            <h2>Titre: <span th:text="${message.getTitre()}"></span></h2>
-            <p>Date: <span th:text="${message.getDateEnvoi()}"></span></p>
-            <p>Info: <span th:text="${message.getContenu()}"></span></p>
+        <div class="box" th:each="message : ${messages}">
+            <div class="box-title">Message en date du <span th:text="${message.getDateEnvoi()}"></span></div>
+            <div class="box-padding">
+                <h2><strong>Titre : </strong><span th:text="${message.getTitre()}"></span></h2>
+                <p><strong>Info: </strong><span th:text="${message.getContenu()}"></span></p>
+                <a th:href="@{/messages/update(messageId=${message.getId()})}" class="btn">Modifier</a>
+                <a th:href="@{/messages/delete(messageId=${message.getId()})}" class="btn">Supprimer</a>
+            </div>
         </div>
-
     </main>
 </div>
 
