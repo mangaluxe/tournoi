@@ -11,4 +11,5 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Intege
     // Trouver un utilisateur par email et pseudo
     Optional<Utilisateur> findByEmailAndPseudo(String email, String pseudo);
 
+    Utilisateur findByPseudoIgnoreCase(String pseudo);
 }

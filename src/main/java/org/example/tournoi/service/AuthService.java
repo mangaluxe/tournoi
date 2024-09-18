@@ -43,7 +43,7 @@ public class AuthService {
 //    }
 
     public boolean login(String pseudo, String motdepasse) {
-        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
+        Utilisateur utilisateur = utilisateurRepository.findByPseudoIgnoreCase(pseudo);
 
         // Vérifie si l'utilisateur est trouvé
         if (utilisateur == null) {
