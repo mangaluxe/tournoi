@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${title}">Tournois de jeux vidéo</title>
     <link th:href="@{/assets/css/style.css}" rel="stylesheet">
-    <style>
-        .ck-editor__editable {
-            min-height: 300px;
-        }
-    </style>
+<!--    <style>-->
+<!--        .ck-editor__editable {-->
+<!--            min-height: 300px;-->
+<!--        }-->
+<!--    </style>-->
     <link rel="icon" th:href="@{/assets/img/favicon.svg}" type="image/svg+xml">
 </head>
 <body>
@@ -118,7 +118,7 @@
                             <div class="h4 mb-0">Recherche</div>
                         </div>
                         <form th:action="@{/recherche}" method="get" class="search">
-                            <input type="search" name="recherche">
+                            <input type="search" name="recherche" placeholder="Recherche tournoi">
                             <button type="submit" class="submit"><span class="icon-search"></span></button>
                         </form>
                     </div>

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Data
@@ -27,6 +28,7 @@ public class Message {
 
     private boolean estLu; // Indique si le message a été lu ou non
 
+
     // ---------- Relations ----------
 
 //    @ManyToOne
@@ -36,4 +38,19 @@ public class Message {
 //    @ManyToOne
 //    @JoinColumn(name = "destinataire_id", nullable = false)
 //    private Utilisateur destinataire; // L'utilisateur qui reçoit le message
+
+
+    // ---------- @Transient : Ne pas persister dans BDD ----------
+
+    @Transient
+    private String dateEnvoiFormatted;
+
+    /**
+     * Formater les dates
+     */
+    public void formatDates() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm");
+        this.dateEnvoiFormatted = this.dateEnvoi != null ? this.dateEnvoi.format(formatter) : "";
+    }
+
 }

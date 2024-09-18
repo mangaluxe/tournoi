@@ -10,14 +10,10 @@ public class HomeController {
 
     // ========== Propriétés ==========
 
-
     // ========== Constructeur ==========
 
     public HomeController() {
-
     }
-
-
 
 
     // ========== Méthodes ==========
@@ -59,10 +55,5 @@ public class HomeController {
         return "info/reglement";
     }
 
-    // ----- Create -----
-
-    // ----- Update -----
-
-    // ----- Delete -----
 
 }

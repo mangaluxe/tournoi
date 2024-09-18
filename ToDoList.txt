@@ -2,7 +2,7 @@
 
 - Diagramme : Nicolas
 - Merise : Rémi
-- Entity : Haiou
+- CSS/Entity : Haiou
 
 Jour 2 - Controller/Service/Dao :
 
@@ -16,4 +16,4 @@ Jour 3 :
 - Résultats : Haiou
 - Message à finir (update, delete)/Diagramme à mettre à jour : Nicolas
 
-Pour tout le monde : Mise en page, Validation, validation personnalisée (censure).
+- Mise en page, Validation, Validation personnalisée (censure), dernière vérification : Haiou

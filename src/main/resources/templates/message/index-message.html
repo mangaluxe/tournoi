@@ -1,0 +1,34 @@
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+<div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Créer message')}"></div>
+
+    <main>
+
+        <h1 class="h1 center">Messagerie</h1>
+
+        <div class="box" th:each="message : ${messages}">
+            <div class="box-title">
+                <span th:text="${message.getTitre()}"></span>
+            </div>
+            <div class="box-padding">
+                <p><span th:text="${message.getContenu()}"></span></p>
+
+<!--                <p class="mini right i">Le <span th:text="${message.getDateEnvoi()}"></span></p>-->
+                <p class="mini right i">Le <span th:text="${message.getDateEnvoiFormatted()}"></span></p>
+            </div>
+            <div class="forum-box-foot">
+                <a th:href="@{/messages/update(messageId=${message.getId()})}" class="mini-btn">Modifier</a>
+                <a th:href="@{/messages/delete(messageId=${message.getId()})}" class="mini-btn">Supprimer</a>
+            </div>
+        </div>
+
+        <p class="mt-5"><a th:href="@{/}">Retour à la page d'accueil</a></p>
+
+    </main>
+
+</div>
+
+
+<div th:replace="~{fragments/footer :: footerImports}"></div>

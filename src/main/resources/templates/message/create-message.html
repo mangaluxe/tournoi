@@ -1,13 +1,13 @@
 <div th:replace="~{fragments/header :: headerImports}"></div>
 
-<p class="mt-5"><a th:href="@{/messages}">Retour à la messagerie</a></p>
-<!--adapter le fil d'ariane pour un accès à la messagerie-->
-<div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='messagerie', currentPage='Créer message')}"></div>
 
 <div class="container">
-    <h1 class="h1 center">Publication d'un message</h1>
-    <main class="box">
-        <div class="box-title">Formulaire de saisie</div>
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Créer message')}"></div>
+
+    <main>
+        <h1 class="h1 center">Publication d'un message</h1>
+
+        <h2 class="h-box-shadow">Formulaire de saisie</h2>
 
         <div class="box-padding">
             <p>Utilisateur: <span th:text="${session.get('pseudo')}"></span></p>
@@ -27,6 +27,9 @@
                 <button class="btn">Publier</button>
             </form>
         </div>
+
+        <p class="mt-5"><a th:href="@{/messages}">Retour à la messagerie</a></p>
+
     </main>
 </div>
 
