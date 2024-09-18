@@ -8,8 +8,6 @@
         <h1 class="h1 center">Inscription</h1>
 
         <form th:action="@{/registration}" method="post" th:object="${utilisateur}">
-            <input th:field="*{id}" type="hidden">
-
             <div>
                 <label for="pseudo">Nom d'utilisateur:</label>
                 <input type="text" id="pseudo" th:field="*{pseudo}">
@@ -18,14 +16,14 @@
 
             <div>
                 <label for="motdepasse">Mot de passe :</label>
-                <input type="password" id="motdepasse" th:field="*{motdepasse}" >
+                <input type="password" id="motdepasse" th:field="*{motdepasse}">
                 <span th:if="${#fields.hasErrors('motdepasse')}" th:errors="*{motdepasse}"></span>
             </div>
 
             <div>
                 <label for="email">Email :</label>
                 <input type="text" id="email" th:field="*{email}">
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></span>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
 
             <div>
@@ -37,7 +35,6 @@
     </main>
 
 </div>
-
 
 
 <!-- Inclusion du footer -->
