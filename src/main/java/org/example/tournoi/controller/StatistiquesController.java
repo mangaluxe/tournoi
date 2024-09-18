@@ -43,6 +43,16 @@ public class StatistiquesController {
 
         List<Statistique> statistiques = statistiquesService.getAllStatistiques();
 
+        statistiques.forEach(stat -> { // Calcul le ratio pour chaque stat
+            if (stat.getDefaites() != 0) {
+                double ratio = (double) stat.getVictoires() / stat.getDefaites();
+                stat.setRatioVictoiresDefaites(ratio);
+            }
+            else {
+                stat.setRatioVictoiresDefaites(Double.MAX_VALUE); // Evite division par 0
+            }
+        });
+
         model.addAttribute("statistiques", statistiques);
 
         // Trier la liste par score :

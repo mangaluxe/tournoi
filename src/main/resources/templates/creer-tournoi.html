@@ -40,6 +40,7 @@
                     <label for="max_joueurs">Max Joueurs :
                         <input type="number" id="max_joueurs" th:field="*{maxJoueurs}">
                     </label>
+                    <p th:if="${#fields.hasErrors('maxJoueurs')}" th:errors="*{maxJoueurs}" class="i warning"></p>
                 </div>
                 <div>
                     <label for="date_debut">Date et heure de Début :

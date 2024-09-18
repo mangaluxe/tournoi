@@ -36,7 +36,28 @@ public class HomeController {
     }
 
 
+    /**
+     * Mentions Légales
+     */
+    @GetMapping("/mentions-legales")
+    public String mentionsLegales(Model model) {
 
+        model.addAttribute("title", "Mentions légales - Battle Arena"); // Pour le title de la page
+
+        return "info/mentions-legales";
+    }
+
+
+    /**
+     * Règlement
+     */
+    @GetMapping("/reglement")
+    public String reglement(Model model) {
+
+        model.addAttribute("title", "Règlement - Battle Arena"); // Pour le title de la page
+
+        return "info/reglement";
+    }
 
     // ----- Create -----
 

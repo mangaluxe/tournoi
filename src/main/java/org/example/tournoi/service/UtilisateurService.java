@@ -3,6 +3,7 @@ package org.example.tournoi.service;
 import org.example.tournoi.dao.UtilisateurRepository;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -69,4 +70,10 @@ public class UtilisateurService {
         }
         return utilisateurExist;
     }
+
+    public Utilisateur findByEmailAndPseudo(String email, String pseudo) {
+        Optional<Utilisateur> utilisateurOpt = utilisateurRepository.findByEmailAndPseudo(email, pseudo);
+        return utilisateurOpt.orElse(null); // Retourne null si aucun utilisateur n'est trouvé
+    }
+
 }
