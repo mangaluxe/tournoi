@@ -2,18 +2,18 @@
 
 <p class="mt-5"><a th:href="@{/messages}">Retour à la messagerie</a></p>
 <!--adapter le fil d'ariane pour un accès à la messagerie-->
-<div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='messagerie', currentPage='Créer message')}"></div>
+<div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='messagerie', currentPage='Modifier un message')}"></div>
 
 <div class="container">
-    <h1 class="h1 center">Publication d'un message</h1>
+    <h1 class="h1 center">Modification du message</h1>
     <main class="box">
-        <div class="box-title">Formulaire de saisie</div>
+        <div class="box-title">Formulaire de modification</div>
 
         <div class="box-padding">
             <p>Utilisateur: <span th:text="${session.get('pseudo')}"></span></p>
 
             <form th:action="@{/messages/add}" th:object="${message}" method="post">
-
+                <input type="hidden" th:field="*{id}">
                 <div class="form-group">
                     <label for="titre">Titre :</label>
                     <br>
@@ -24,7 +24,7 @@
                     <label for="contenu">Contenu :</label>
                     <textarea id="contenu" name="contenu" placeholder="Rédigez votre message" th:field="*{contenu}"></textarea>
                 </div>
-                <button class="btn">Publier</button>
+                <button class="btn">Modifier</button>
             </form>
         </div>
     </main>
