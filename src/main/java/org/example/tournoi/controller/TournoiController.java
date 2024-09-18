@@ -142,7 +142,7 @@ public class TournoiController {
             tournoiExistant.setDateDebut(tournoiModifie.getDateDebut());
             tournoiExistant.setDateFin(tournoiModifie.getDateFin());
 
-            tournoiService.creerTournoi(tournoiExistant); // Sauvegarde les modifications
+            tournoiService.creerTournoi(tournoiExistant);
 
             return "redirect:/tournoi/" + id;
         }
@@ -154,7 +154,9 @@ public class TournoiController {
 
     // ----- Delete -----
 
-    // Supprimer un tournoi (annuler)
+    /**
+     * Supprimer un tournoi (annuler)
+     */
     @PostMapping("/tournoi/{id}/supprimer")
     public String supprimerTournoi(@PathVariable("id") int id) {
         tournoiService.supprimerTournoi(id);

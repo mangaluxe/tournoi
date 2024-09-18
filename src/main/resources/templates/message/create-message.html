@@ -1,0 +1,37 @@
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+<div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='Tournois', currentPage='Créer message')}"></div>
+
+    <main>
+        <h1 class="h1 center">Publication d'un message</h1>
+
+        <h2 class="h-box-shadow">Formulaire de saisie</h2>
+
+        <div class="box-padding">
+            <p>Utilisateur: <span th:text="${session.get('pseudo')}"></span></p>
+
+            <form th:action="@{/messages/add}" th:object="${message}" method="post">
+
+                <div class="form-group">
+                    <label for="titre">Titre :</label>
+                    <br>
+                    <input type="text" id="titre" name="titre" placeholder="Ajoutez un titre" th:field="*{titre}">
+                </div>
+
+                <div class="form-group">
+                    <label for="contenu">Contenu :</label>
+                    <textarea id="contenu" name="contenu" placeholder="Rédigez votre message" th:field="*{contenu}"></textarea>
+                </div>
+                <button class="btn">Publier</button>
+            </form>
+        </div>
+
+        <p class="mt-5"><a th:href="@{/messages}">Retour à la messagerie</a></p>
+
+    </main>
+</div>
+
+
+<div th:replace="~{fragments/footer :: footerImports}"></div>

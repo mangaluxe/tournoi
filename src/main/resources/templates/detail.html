@@ -1,27 +1,29 @@
-<div th:replace="~{fragments/header :: headerImports}"></div>
-
-<div class="container">
-    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='', currentPage='Connexion')}"></div>
-
-    <main>
-        <h1>Détails de l'étudiant</h1>
-        <hr>
-        <div   th:if="${utilisateur != null}">
-            <p>Pseudo : <span th:text="${utilisateur.getPseudo()}"></span></p>
-            <p>Prénom : <span th:text="${utilisateur.getPrenom()}"></span></p>
-            <p>Nom : <span th:text="${utilisateur.getNom()}"></span></p>
-            <p>Âge : <span th:text="${utilisateur.getDateNaissance()}"></span></p>
-            <p>Email : <span th:text="${utilisateur.getEmail()}"></span></p>
-        </div>
-        <hr>
-
-        <a th:href="@{/update(utilisateurId=${utilisateur.getId()})}" class="btn btn-info">Modifier</a>
+<!--<div th:replace="~{fragments/header :: headerImports}"></div>-->
 
 
 
-    </main>
+<!--<div class="container">-->
+<!--    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='', currentPage='Connexion')}"></div>-->
 
-</div>
+<!--    <main>-->
 
-<!-- Inclusion du footer -->
-<div th:replace="~{fragments/footer :: footerImports}"></div>
+<!--        <h1 class="h1 center">Détails</h1>-->
+
+<!--        <div th:if="${utilisateur != null}">-->
+<!--            <p>Pseudo : <span th:text="${utilisateur.getPseudo()}"></span></p>-->
+<!--            <p>Prénom : <span th:text="${utilisateur.getPrenom()}"></span></p>-->
+<!--            <p>Nom : <span th:text="${utilisateur.getNom()}"></span></p>-->
+<!--            <p>Âge : <span th:text="${utilisateur.getDateNaissance()}"></span></p>-->
+<!--            <p>Email : <span th:text="${utilisateur.getEmail()}"></span></p>-->
+<!--        </div>-->
+<!--        <hr>-->
+
+<!--        <a th:href="@{/update(utilisateurId=${utilisateur.getId()})}" class="btn">Modifier</a>-->
+
+<!--    </main>-->
+
+<!--</div>-->
+
+
+
+<!--<div th:replace="~{fragments/footer :: footerImports}"></div>-->

@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${title}">Tournois de jeux vidéo</title>
     <link th:href="@{/assets/css/style.css}" rel="stylesheet">
-    <style>
-        .ck-editor__editable {
-            min-height: 300px;
-        }
-    </style>
+<!--    <style>-->
+<!--        .ck-editor__editable {-->
+<!--            min-height: 300px;-->
+<!--        }-->
+<!--    </style>-->
     <link rel="icon" th:href="@{/assets/img/favicon.svg}" type="image/svg+xml">
 </head>
 <body>
@@ -43,7 +43,7 @@
                         <div>Menu</div>
                     </div>
                 </div>
-                <a th:href="@{/}" class="logo"><img th:src="@{/assets/img/logo-nav.png}" alt="Page d'accueil" width="100"></a>
+                <a th:href="@{/}" class="logo"><img th:src="@{/assets/img/logo-nav.png}" alt="Page d'accueil"></a>
 
                 <div id="my_overlay" class="my-overlay">
                     <nav class="nav-icon">
@@ -118,7 +118,7 @@
                             <div class="h4 mb-0">Recherche</div>
                         </div>
                         <form th:action="@{/recherche}" method="get" class="search">
-                            <input type="search" name="recherche">
+                            <input type="search" name="recherche" placeholder="Recherche tournoi">
                             <button type="submit" class="submit"><span class="icon-search"></span></button>
                         </form>
                     </div>
@@ -128,9 +128,7 @@
                     <a href="javascript:void(0)" class="icon-user" id="profil-drop"><span class="txt"><span th:text="${session.pseudo}">Pseudo</span></span></a>
                     <div class="profil-dropdown">
                         <div class="profil-dropdown-menu">
-<!--                            <a href="#" rel="nofollow">Espace Membre</a>-->
-                            <a th:href="@{/espace-membre}">Espace membre</a>
-                            <a href="#" rel="nofollow">Profil public</a>
+                            <a th:href="@{/espace-membre}" rel="nofollow">Espace membre</a>
                             <a th:href="@{/logout}" rel="nofollow"><span class="icon-exit"></span>Déconnexion</a>
                         </div>
                     </div>
