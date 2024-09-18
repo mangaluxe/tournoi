@@ -17,8 +17,10 @@
                 <p><strong>Format :</strong> <span th:text="${tournoi.format}"></span></p>
                 <p><strong>Règles :</strong> <span th:text="${tournoi.regles}"></span></p>
                 <p><strong>Nombre maximum de participants :</strong> <span th:text="${tournoi.maxJoueurs}"></span></p>
-                <p><strong>Date de début :</strong> <span th:text="${tournoi.dateDebut}"></span></p>
-                <p><strong>Date de fin :</strong> <span th:text="${tournoi.dateFin}"></span></p>
+<!--                <p><strong>Date de début :</strong> <span th:text="${tournoi.dateDebut}"></span></p>-->
+                <p><strong>Date de début :</strong> <span th:text="${tournoi.dateDebutFormatted}"></span></p>
+<!--                <p><strong>Date de fin :</strong> <span th:text="${tournoi.dateFin}"></span></p>-->
+                <p><strong>Date de fin :</strong> <span th:text="${tournoi.dateFinFormatted}"></span></p>
             </div>
         </div>
 

@@ -35,6 +35,83 @@ public class InscriptionController {
 
     // ========== Méthodes ==========
 
+    // ----- Read -----
+
+    /**
+     * Afficher la liste des inscriptions
+     */
+    @GetMapping("/inscriptions-tournois")
+    public String listeInscriptionsTournois(Model model) {
+
+        model.addAttribute("title", "Toutes les inscription aux tournois"); // Pour le title de la page
+
+        List<Inscription> inscriptions = inscriptionService.getAllInscriptions();
+
+        model.addAttribute("inscriptions", inscriptions);
+
+        // Formater les dates pour chaque tournoi associé aux inscriptions
+        inscriptions.forEach(i -> {
+            i.getTournoi().formatDates();
+        });
+
+        return "inscriptions-tournois";
+    }
+
+
+    /**
+     * Afficher mes inscriptions
+     */
+    @GetMapping("/mes-inscriptions")
+    public String mesInscriptionsTournois(HttpSession session, Model model) {
+
+        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id"); // Récupérer l'ID de l'utilisateur connecté depuis la session
+
+        // Vérifier que l'utilisateur est bien connecté
+        if (utilisateurId != null) {
+            List<Inscription> inscriptions = inscriptionService.getInscriptionsByUtilisateurId(utilisateurId); // Récupérer les inscriptions de cet utilisateur
+
+            if (inscriptions != null) {
+                // Formater dates pour chaque tournoi associé aux inscriptions
+                inscriptions.forEach(i -> {
+                    if (i.getTournoi() != null) {
+                        i.getTournoi().formatDates();
+                    }
+                });
+
+                model.addAttribute("inscriptions", inscriptions);
+            }
+        }
+        else {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("title", "Mes inscriptions aux tournois");
+
+        return "mes-inscriptions";
+    }
+
+
+    /**
+     * Afficher une inscription
+     */
+    @GetMapping("/inscription/{id}")
+    public String monInscriptionTournoi(@PathVariable("id") int id, HttpSession session, Model model) {
+
+        Inscription inscription = inscriptionService.getInscriptionById(id);
+        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id");
+
+        // Vérifier que l'inscription existe et que l'utilisateur est bien le propriétaire
+        if (inscription != null && inscription.getUtilisateur().getId() == utilisateurId) {
+            model.addAttribute("inscription", inscription);
+            model.addAttribute("title", "Mon inscription");
+            return "mon-inscription";
+        }
+        else {
+            return "error/404";
+        }
+    }
+
+
     // ----- Create -----
 
     /**
@@ -78,84 +155,6 @@ public class InscriptionController {
         }
         else {
             return "redirect:/login";
-        }
-    }
-
-
-    // ----- Read -----
-
-    /**
-     * Afficher la liste des inscriptions
-     */
-    @GetMapping("/inscriptions-tournois")
-    public String listeInscriptionsTournois(Model model) {
-
-        model.addAttribute("title", "Toutes les inscription aux tournois"); // Pour le title de la page
-
-        List<Inscription> inscriptions = inscriptionService.getAllInscriptions();
-
-        model.addAttribute("inscriptions", inscriptions);
-
-        // Formater les dates pour chaque tournoi associé aux inscriptions
-        inscriptions.forEach(i -> {
-            i.getTournoi().formatDates();
-        });
-
-        return "inscriptions-tournois";
-    }
-
-
-    /**
-     * Afficher mes inscriptions
-     */
-    @GetMapping("/mes-inscriptions")
-    public String mesInscriptionsTournois(HttpSession session, Model model) {
-
-        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id"); // Récupérer l'ID de l'utilisateur connecté depuis la session
-
-        // Vérifier que l'utilisateur est bien connecté
-        if (utilisateurId != null) {
-            List<Inscription> inscriptions = inscriptionService.getInscriptionsByUtilisateurId(utilisateurId); // Récupérer les inscriptions de cet utilisateur
-
-            if (inscriptions != null) {
-                // Formater les dates pour chaque tournoi associé aux inscriptions
-                inscriptions.forEach(i -> {
-                    if (i.getTournoi() != null) {
-                        i.getTournoi().formatDates();
-                    }
-                });
-
-                model.addAttribute("inscriptions", inscriptions);
-            }
-        }
-        else {
-            return "redirect:/login";
-        }
-
-        model.addAttribute("title", "Mes inscriptions aux tournois");
-
-        return "mes-inscriptions";
-    }
-
-
-
-    /**
-     * Afficher une inscription
-     */
-    @GetMapping("/inscription/{id}")
-    public String monInscriptionTournoi(@PathVariable("id") int id, HttpSession session, Model model) {
-
-        Inscription inscription = inscriptionService.getInscriptionById(id);
-        Integer utilisateurId = (Integer) session.getAttribute("pseudo_id");
-
-        // Vérifier que l'inscription existe et que l'utilisateur est bien le propriétaire
-        if (inscription != null && inscription.getUtilisateur().getId() == utilisateurId) {
-            model.addAttribute("inscription", inscription);
-            model.addAttribute("title", "Mon inscription");
-            return "mon-inscription";
-        }
-        else {
-            return "error/404"; // Si l'inscription n'existe pas ou l'utilisateur n'est pas propriétaire, renvoyer une erreur 404
         }
     }
 

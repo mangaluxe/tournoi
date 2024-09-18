@@ -1,0 +1,74 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+
+<div class="container">
+    <h1 class="h1 center">Statistiques & Résultats</h1>
+
+    <h2 class="h-box-shadow">Le top du classement :</h2>
+
+    <div class="table-list-head topics-box">
+        <div class="e b">Rang</div>
+        <div class="e b">Joueur</div>
+        <div class="e b">Score</div>
+        <div class="e b">Victoires</div>
+        <div class="e b">Défaites</div>
+    </div>
+    <ul class="table-list topics-box">
+        <li th:each="stat, iterStat : ${statistiques}">
+            <div class="e center-center">
+                <span th:text="${iterStat.index + 1}"></span>
+            </div>
+            <div class="e center-center">
+                <span th:text="${stat.utilisateur.pseudo}"></span>
+            </div>
+            <div class="e center-center">
+                <span th:text="${stat.score}"></span>
+            </div>
+            <div class="e center-center">
+                <span th:text="${stat.victoires}"></span>
+            </div>
+            <div class="e center-center">
+                <span th:text="${stat.defaites}"></span>
+            </div>
+        </li>
+    </ul>
+
+
+    <h2 class="h-box-shadow">Tous les résultats :</h2>
+
+    <div class="table-list-head topics-box">
+        <div class="e b">Pseudo</div>
+        <div class="e b">Score</div>
+        <div class="e b">Victoires</div>
+        <div class="e b">Défaites</div>
+    </div>
+    <ul class="table-list topics-box">
+        <li th:each="s : ${statistiques}">
+            <div class="e center-center">
+                <div class="topics-box-title-icon icon-gamepad"></div>
+                <div>
+                    <span th:text="${s.utilisateur.pseudo}"></span>
+                </div>
+            </div>
+            <div class="e center-center">
+                <span th:text="${s.score}"></span>
+            </div>
+            <div class="e center-center">
+                <span th:text="${s.victoires}"></span>
+            </div>
+            <div class="e center-center">
+                <span th:text="${s.defaites}"></span>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>
+
+

@@ -58,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {margin-top: 0}
     margin-bottom: 30px;
 }
 .h-box-shadow::after {
-    background-color: var(--blue5);
+    background-color: var(--blue6);
     box-shadow: 6px 6px rgba(45, 120, 190, .6), 12px 12px rgba(45, 120, 190, .3);
     content: "";
     position: absolute;
@@ -84,7 +84,7 @@ h1, h2, h3, h4, h5, h6 {margin-top: 0}
     transform: rotate(-11deg);
     border: solid transparent;
     border-width: 44px 20px 20px 20px;
-    border-color: var(--blue3) transparent transparent transparent;
+    border-color: var(--blue6) transparent transparent transparent;
     z-index: -1;
 }
 
@@ -662,7 +662,7 @@ main .form-control.form-invalid {
 
 
 .header-nav .nav-icon .icon-user {
-    background-color: var(--blue3);
+    background-color: var(--blue6);
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -670,7 +670,7 @@ main .form-control.form-invalid {
     margin-right: 15px;
 }
 .header-nav .nav-icon .icon-user:hover {
-    background-color: #179BE1;
+    background-color: var(--blue7);
 }
 a .txt {
     font: .9em Verdana, sans-serif;
@@ -718,7 +718,7 @@ a .txt {
 
 .search button.submit {
     height: 37px; /* Pour que l'input et le bouton submit aient la même hauteur */
-    background-color: var(--blue3);
+    background-color: var(--blue6);
     border: none;
     border-radius: 0 20px 20px 0;
     color: var(--white);
@@ -732,7 +732,7 @@ a .txt {
 }
 
 .search button.submit:hover {
-    background-color: #179BE1;
+    background-color: var(--blue7);
 }
 
 
@@ -889,7 +889,7 @@ body.menu-active {
 
 .footer {
     margin-top: 40px;
-    background-color: var(--blue6);
+    background-color: var(--black);
     width: 100%;
     min-height: 80px;
     padding: 15px;

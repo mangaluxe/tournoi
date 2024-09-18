@@ -61,8 +61,13 @@ public class TournoiController {
         Tournoi tournoi = tournoiService.getTournoiById(id);
 
         if (tournoi != null) {
+
+            // Formater date
+            tournoi.formatDates();
+
             model.addAttribute("tournoi", tournoi);
             model.addAttribute("title", "Tournoi : " + tournoi.getNom()); // Pour le title de la page
+
             return "tournoi";
         }
         else {

@@ -1,6 +1,8 @@
 package org.example.tournoi.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,11 +18,16 @@ public class Statistique {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int score;  // Score ou nombre de points obtenus par le joueur
+    @NotNull(message = "Score obligatoire") // Pour int, utiliser @NotNull au lieu de @NotBlank
+//    private int score; // int pose problème avec la validation de formulaire, il faut utiliser Integer
+    private Integer score; // Score joueur
 
-    private int victoires;  // Nombre de victoires
+    @NotNull(message = "Nb victoires obligatoire")
+    private Integer victoires; // Nb victoires
 
-    private int defaites;   // Nombre de défaites
+    @NotNull(message = "Nb défaites obligatoire")
+    private Integer defaites; // Nb défaites
+
 
     // ---------- Relations ----------
 
