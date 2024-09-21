@@ -8,23 +8,28 @@
 
         <h1 class="h1 center">Inscription</h1>
 
+        <div th:if="${error}" class="warning b center">
+            <p th:text="${error}"></p>
+        </div>
+
         <form th:action="@{/registration}" method="post" th:object="${utilisateur}">
+            <input type="hidden" name="csrfToken" th:value="${csrfToken}">
             <div>
-                <label for="pseudo">Nom d'utilisateur:</label>
+                <label for="pseudo">Nom d'utilisateur :</label>
                 <input type="text" id="pseudo" th:field="*{pseudo}">
-                <span th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></span>
+                <p th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}" class="i warning"></p>
             </div>
 
             <div>
                 <label for="motdepasse">Mot de passe :</label>
                 <input type="password" id="motdepasse" th:field="*{motdepasse}">
-                <span th:if="${#fields.hasErrors('motdepasse')}" th:errors="*{motdepasse}"></span>
+                <p th:if="${#fields.hasErrors('motdepasse')}" th:errors="*{motdepasse}" class="i warning"></p>
             </div>
 
             <div>
                 <label for="email">Email :</label>
                 <input type="text" id="email" th:field="*{email}">
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="i warning"></p>
             </div>
 
             <div>

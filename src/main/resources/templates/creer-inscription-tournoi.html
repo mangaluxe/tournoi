@@ -15,6 +15,7 @@
         <div th:if="${isLogged}">
 
             <form th:action="@{/inscription-tournoi/nouveau}" th:object="${inscription}" method="post">
+                <input type="hidden" name="csrfToken" th:value="${csrfToken}">
 
                 <div>Vous : <span th:text="${session.pseudo}">Pseudo</span> (pseudo_id : <span th:text="${session.pseudo_id}"></span>)</div>
 

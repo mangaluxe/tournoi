@@ -17,6 +17,7 @@
         </div>
 
         <form th:action="@{/motdepasse-oublie}" method="post">
+            <input type="hidden" name="csrfToken" th:value="${csrfToken}">
             <div>
                 <label for="pseudo">Pseudo :
                     <input type="text" id="pseudo" name="pseudo" required>

@@ -1,5 +1,6 @@
 package org.example.tournoi.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.tournoi.entity.Utilisateur;
 import org.example.tournoi.service.AuthService;
@@ -9,8 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.mindrot.jbcrypt.BCrypt; // Utiliser le hachage de mot de passe BCrypt
 
 
 @Controller
@@ -22,40 +23,33 @@ public class AuthController {
     }
 
 
-// Non nécessaire car fait doublon avec la méthode dans UtilisateurController
-//    @PostMapping("/inscription")
-//    public String inscriptionForm(@ModelAttribute("utilisateur") Utilisateur utilisateur){
-//        authService.register(utilisateur);
-//        return "redirect:/";
-//    }
-
-
     @RequestMapping("/registration")
     public String formAddUser(Model model) {
         if (!authService.isLogged()) {
+            model.addAttribute("title", "Inscription sur Battle Zone"); // Pour le title de la page
+
             model.addAttribute("utilisateur", new Utilisateur());
+
             return "registration-form";
         }
         return "index";
     }
 
-//    @PostMapping("/registration")
-//    public String inscriptionForm(@ModelAttribute("utilisateur") Utilisateur utilisateur, Model model, RedirectAttributes redirectAttributes) {
-//        try {
-//            authService.register(utilisateur);
-//            redirectAttributes.addFlashAttribute("successMessage", "Inscription réussie ! Vous pouvez maintenant vous connecter."); // Message flash
-//            return "redirect:/";
-//        } catch (IllegalArgumentException e) {
-//            model.addAttribute("error", e.getMessage());
-//            return "registration-form";
-//        }
-//    }
-
     @PostMapping("/registration")
-    public String inscriptionForm(@ModelAttribute("utilisateur") @Valid Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
+    public String inscriptionForm(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam("csrfToken") String csrfToken, HttpSession session, Model model) {
+        // --- Vérification du token CSRF ---
+        String sessionCsrfToken = (String) session.getAttribute("csrfToken");
+
+        if (sessionCsrfToken == null || !sessionCsrfToken.equals(csrfToken)) {
+            model.addAttribute("error", "Erreur token CSRF !");
             return "registration-form";
         }
+        // --- Validation de formulaire ---
+        if (bindingResult.hasErrors()) {
+            return "registration-form"; // Si erreurs de validation, retour au formulaire
+        }
+        // --- ---
+
         try {
             authService.register(utilisateur);
             redirectAttributes.addFlashAttribute("successMessage", "Inscription réussie ! Vous pouvez maintenant vous connecter.");
@@ -66,31 +60,41 @@ public class AuthController {
         }
     }
 
+
     @RequestMapping("/login")
     public String connexion(Model model) {
+        model.addAttribute("utilisateur", new Utilisateur()); // Pour maintenir les données soumises en cas d'erreur de validation. Mettre th:object="${utilisateur}" dans <form th:action="@{/login}" th:object="${utilisateur}" method="post">
+
+        model.addAttribute("title", "Connexion sur Battle Zone"); // Pour le title de la page
+
         return "connexion-form";
     }
-
-//    @PostMapping("/login")
-//    public String connexionForm(@ModelAttribute("pseudo") String pseudo, @ModelAttribute("motdepasse") String motdepasse, RedirectAttributes redirectAttributes){
-//        boolean connected = authService.login(pseudo, motdepasse);
-//        if(connected){
-//            redirectAttributes.addFlashAttribute("successMessage", "Connexion réussie !"); // Message flash
-//
-//            return "redirect:/";
-//        }
-//        redirectAttributes.addFlashAttribute("errorMessage", "Identifiants incorrects !"); // Message flash
-//        return "redirect:/login";
-//    }
 
 
     //PostMapping en prenant en compte la gestion des rôles
     @PostMapping("/login")
-    public String connexionForm(@ModelAttribute("pseudo") String pseudo, @ModelAttribute("motdepasse") String motdepasse, RedirectAttributes redirectAttributes) {
-        boolean connected = authService.login(pseudo, motdepasse);
+    public String connexionForm(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam("csrfToken") String csrfToken, HttpSession session, Model model) {
+        // --- Vérification du token CSRF ---
+        String sessionCsrfToken = (String) session.getAttribute("csrfToken");
+
+        if (sessionCsrfToken == null || !sessionCsrfToken.equals(csrfToken)) {
+            model.addAttribute("error", "Erreur token CSRF !");
+            return "connexion-form";
+        }
+        // --- Validation de formulaire ---
+        if (bindingResult.hasErrors()) {
+            return "connexion-form"; // Si erreurs de validation, retour au formulaire
+        }
+        // --- ---
+
+        boolean connected = authService.login(utilisateur.getPseudo(), utilisateur.getMotdepasse());
+        System.out.println("Connexion réussie ? " + connected); // Debug
+
         if (connected) {
             // Récupération du rôle de l'utilisateur connecté
             String role = authService.getCurrentUserRole();
+
+            System.out.println("Rôle utilisateur : " + role); // Debug
 
             // Ajout d'un message de succès à la session
             redirectAttributes.addFlashAttribute("successMessage", "Connexion réussie !"); // Message flash

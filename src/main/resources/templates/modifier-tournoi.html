@@ -10,6 +10,7 @@
         <h1 class="h1 center">Modifier le Tournoi</h1>
 
         <form th:action="@{/tournoi/{id}/modifier(id=${tournoi.id})}" th:object="${tournoi}" method="post">
+            <input type="hidden" name="csrfToken" th:value="${csrfToken}">
 
             <div>
                 <label for="nom">Nom du tournoi :

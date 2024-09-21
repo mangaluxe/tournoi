@@ -11,7 +11,8 @@
                 <div class="h4 mb-0">Connexion</div>
             </div>
             <div class="modal-connect-body">
-                <form method="post" th:action="@{/login}">
+                <form th:action="@{/login}" method="post">
+                    <input type="hidden" name="csrfToken" th:value="${csrfToken}">
                     <label for="login_username">Pseudo :<br>
                         <input type="text" name="pseudo" id="login_username" placeholder="Pseudo">
                     </label><br>

@@ -118,6 +118,7 @@
                             <div class="h4 mb-0">Recherche</div>
                         </div>
                         <form th:action="@{/recherche}" method="get" class="search">
+                            <input type="hidden" name="csrfToken" th:value="${csrfToken}">
                             <input type="search" name="recherche" placeholder="Recherche tournoi">
                             <button type="submit" class="submit"><span class="icon-search"></span></button>
                         </form>

@@ -16,6 +16,7 @@
         <div th:if="${isLogged == true}">
 
             <form action="#" th:action="@{/tournoi/nouveau}" th:object="${tournoi}" method="post">
+                <input type="hidden" name="csrfToken" th:value="${csrfToken}">
                 <div>
                     <label for="nom">Nom du Tournoi :
                         <input type="text" id="nom" th:field="*{nom}">

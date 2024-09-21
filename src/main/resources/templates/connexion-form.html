@@ -8,15 +8,21 @@
 
         <h1 class="center h1">Connexion</h1>
 
-        <form th:action="@{/login}" method="post">
+        <div th:if="${error}" class="warning b center">
+            <p th:text="${error}"></p>
+        </div>
+
+        <form th:action="@{/login}" th:object="${utilisateur}" method="post">
+            <input type="hidden" name="csrfToken" th:value="${csrfToken}">
             <div class="mb-3">
-                <label for="pseudo" class="form-label">Pseudo</label>
-                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Nom d'utilisateur">
+                <label for="pseudo" class="form-label">Pseudo :</label>
+                <input type="text" class="form-control" id="pseudo" name="pseudo" th:field="*{pseudo}" placeholder="Nom d'utilisateur">
+                <p th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}" class="i warning"></p>
             </div>
             <div class="mb-3">
-                <label for="motdepasse" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="motdepasse" name="motdepasse"
-                       placeholder="Mot de passe">
+                <label for="motdepasse" class="form-label">Mot de passe :</label>
+                <input type="password" class="form-control" id="motdepasse" name="motdepasse" placeholder="Mot de passe">
+                <p th:if="${#fields.hasErrors('motdepasse')}" th:errors="*{motdepasse}" class="i warning"></p>
             </div>
             <button type="submit" class="btn btn-primary">Se connecter</button>
         </form>

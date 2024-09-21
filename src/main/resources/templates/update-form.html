@@ -8,6 +8,7 @@
         <h1 class="h1 center">Modification des informations personnelles</h1>
 
         <form th:action="@{/update}" method="post" th:object="${utilisateur}">
+            <input type="hidden" name="csrfToken" th:value="${csrfToken}">
             <input th:field="*{id}" type="hidden">
 
             <div>

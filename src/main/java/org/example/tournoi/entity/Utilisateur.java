@@ -38,6 +38,7 @@ public class Utilisateur {
 
     private String prenom;
 
+//    @NotBlank(message = "Email obligatoire") // Pose problème de connexion avec la validation, car email non demandé
     @Email(message = "Email non valide")
     private String email;
 

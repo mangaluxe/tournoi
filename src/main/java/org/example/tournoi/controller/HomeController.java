@@ -78,7 +78,7 @@ public class HomeController {
     public String testDecryptage(Model model) {
         String pseudo = "haiou";
         String motdepasse = "1234";
-        String hashedPassword = "$2a$10$iFp8RTN0gJuFprcbbLu3QemQwGEPqHUi6pLRLJI6Ma004xKGhsUze"; // Hash de "1234"
+        String hashedPassword = "$2a$10$iFp8RTN0gJuFprcbbLu3QemQwGEPqHUi6pLRLJI6Ma004xKGhsUze"; // Hash de "1234" issue de la BDD normalement
 
         if (pseudo.equals("haiou") && BCrypt.checkpw(motdepasse, hashedPassword)) { // BCrypt.checkpw() pour vérifier hashage
             System.out.println("Pseudo et mot de passe correctes");
