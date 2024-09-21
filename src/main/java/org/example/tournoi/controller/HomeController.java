@@ -26,7 +26,7 @@ public class HomeController {
     @GetMapping("/") // URL : http://localhost:8080/
     public String home(Model model) {
 
-        model.addAttribute("title", "Tournoi Battle Arena"); // Pour le title de la page
+        model.addAttribute("title", "Tournoi Battle Zone"); // Pour le title de la page
 
         return "index"; // Renvoie le nom de la vue "index" pour la page d'accueil
     }
@@ -38,7 +38,7 @@ public class HomeController {
     @GetMapping("/mentions-legales")
     public String mentionsLegales(Model model) {
 
-        model.addAttribute("title", "Mentions légales - Battle Arena"); // Pour le title de la page
+        model.addAttribute("title", "Mentions légales - Battle Zone"); // Pour le title de la page
 
         return "info/mentions-legales";
     }
@@ -50,7 +50,7 @@ public class HomeController {
     @GetMapping("/reglement")
     public String reglement(Model model) {
 
-        model.addAttribute("title", "Règlement - Battle Arena"); // Pour le title de la page
+        model.addAttribute("title", "Règlement - Battle Zone"); // Pour le title de la page
 
         return "info/reglement";
     }

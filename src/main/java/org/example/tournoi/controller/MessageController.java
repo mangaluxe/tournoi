@@ -1,10 +1,12 @@
 package org.example.tournoi.controller;
 
+import jakarta.validation.Valid;
 import org.example.tournoi.entity.Message;
 import org.example.tournoi.service.AuthService;
 import org.example.tournoi.service.MessageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -55,6 +57,7 @@ public class MessageController {
 
     // ----- Create -----
 
+    // Formulaire pour créer
     @RequestMapping("/messages/create")
     public String createMessage (Model model) {
 
@@ -66,29 +69,38 @@ public class MessageController {
 
             return "message/create-message";
         }
+
+        model.addAttribute("error", "Connectez-vous pour poster !");
+
         return "redirect:/login";
     }
 
+    // Ajouter ou Modifier
     @PostMapping("messages/add")
-    public String addMessage (@ModelAttribute("message") Message message) {
+    public String addMessage (@Valid @ModelAttribute("message") Message message, BindingResult bindingResult, Model model) {
         if (authService.isLogged()) {
-            if (message.getId() != null) {
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("message", message); // Retourner le formulaire avec les erreurs
+                return message.getId() != null ? "message/update-message" : "message/create-message";
+            }
+
+            if (message.getId() != null) { // Modifier
                 messageService.updateMessage(message.getId(), message);
-                return "redirect:/messages";
-            } else {
+            }
+            else { // Créer
                 message.setDateEnvoi(LocalDateTime.now());
                 messageService.saveMessage(message);
-                System.out.println("ok");
-                return "redirect:/messages";
-
             }
+            return "redirect:/messages"; // Rediriger vers la liste des messages
         }
+
         return "redirect:/login";
     }
 
 
     // ----- Update -----
 
+    // Formulaire pour modifier
     @RequestMapping("/messages/update")
     public String updateMessage (@RequestParam("messageId") Long id, Model model) {
         if (authService.isLogged()) {
@@ -101,6 +113,7 @@ public class MessageController {
 
             return "message/update-message";
         }
+
         return "redirect:/login";
     }
 

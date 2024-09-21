@@ -1,9 +1,12 @@
 package org.example.tournoi.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.tournoi.validation.MyValid;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,10 +22,13 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Titre obligatoire")
     private String titre;
 
-    @Column(nullable = false, length = 65535) // 65535 = taille max pour TEXT
-    private String contenu; // Contenu du message
+    @NotBlank(message = "Contenu du message obligatoire")
+    @MyValid(message = "Gros mots interdits") // Validation personnalisée
+    @Column(columnDefinition = "text")
+    private String contenu;
 
     private LocalDateTime dateEnvoi; // Date et heure d'envoi du message
 

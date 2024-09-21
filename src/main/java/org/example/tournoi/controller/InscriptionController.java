@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.example.tournoi.entity.Inscription;
 import org.example.tournoi.entity.Tournoi;
 import org.example.tournoi.entity.Utilisateur;
+import org.example.tournoi.service.AuthService;
 import org.example.tournoi.service.InscriptionService;
 import org.example.tournoi.service.TournoiService;
 import org.example.tournoi.service.UtilisateurService;
@@ -22,14 +23,16 @@ public class InscriptionController {
     private final InscriptionService inscriptionService;
     private final TournoiService tournoiService;
     private final UtilisateurService utilisateurService;
+    private final AuthService authService;
 
 
     // ========== Constructeur ==========
 
-    public InscriptionController(InscriptionService inscriptionService, TournoiService tournoiService, UtilisateurService utilisateurService) {
+    public InscriptionController(InscriptionService inscriptionService, TournoiService tournoiService, UtilisateurService utilisateurService, AuthService authService) {
         this.inscriptionService = inscriptionService;
         this.tournoiService = tournoiService;
         this.utilisateurService = utilisateurService;
+        this.authService = authService;
     }
 
 
@@ -119,12 +122,16 @@ public class InscriptionController {
      */
     @GetMapping("/inscription-tournoi/nouveau")
     public String formulaireInscriptionTournoi(Model model) {
+        if (!authService.isLogged()) { // Redirige si non connecté
+            return "redirect:/login";
+        }
+
+        model.addAttribute("title", "Inscription aux tournois");  // Pour le title de la page
 
         List<Tournoi> tournois = tournoiService.getAllTournois();
-
-        model.addAttribute("title", "Inscription aux tournois"); // Pour le title de la page
         model.addAttribute("tournois", tournois);
         model.addAttribute("inscription", new Inscription());
+        model.addAttribute("isLogged", true); // Passer l'état de connexion
 
         return "creer-inscription-tournoi";
     }
@@ -134,6 +141,9 @@ public class InscriptionController {
      */
     @PostMapping("/inscription-tournoi/nouveau")
     public String creerInscriptionTournoi(@ModelAttribute("inscription") Inscription inscription, HttpSession session) {
+        if (!authService.isLogged()) { // Par sécurité, on vérifie également dans PostMapping qu'on est connecté
+            return "redirect:/login";
+        }
 
         Integer utilisateurId = (Integer) session.getAttribute("pseudo_id"); // Récupérer l'ID de l'utilisateur connecté depuis la session
 

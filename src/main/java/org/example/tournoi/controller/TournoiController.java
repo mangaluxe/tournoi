@@ -2,6 +2,7 @@ package org.example.tournoi.controller;
 
 import jakarta.validation.Valid;
 import org.example.tournoi.entity.Tournoi;
+import org.example.tournoi.service.AuthService;
 import org.example.tournoi.service.TournoiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +19,14 @@ public class TournoiController {
     // ========== Propriétés ==========
 
     private TournoiService tournoiService;
+    private final AuthService authService;
 
 
     // ========== Controller ==========
 
-    public TournoiController(TournoiService tournoiService) {
+    public TournoiController(TournoiService tournoiService, AuthService authService) {
         this.tournoiService = tournoiService;
+        this.authService = authService;
     }
 
 
@@ -83,8 +86,18 @@ public class TournoiController {
      */
     @GetMapping("/tournoi/nouveau")
     public String formulaireCreationTournoi(Model model) {
+        model.addAttribute("title", "Créer nouveau tournoi");
+
         Tournoi tournoi = new Tournoi(); // Un tournoi vide pour le formulaire
-        model.addAttribute("tournoi", tournoi);
+
+        if (!authService.isLogged()) {
+            model.addAttribute("isLogged", false);
+        }
+        else {
+            model.addAttribute("isLogged", true);
+            model.addAttribute("tournoi", tournoi);
+        }
+
         return "creer-tournoi"; // Attention : indiquer nom du fichier html uniquement, ne marche pas avec nom de route
     }
 
@@ -93,6 +106,11 @@ public class TournoiController {
      */
     @PostMapping("/tournoi/nouveau")
     public String creerTournoi(@Valid @ModelAttribute("tournoi") Tournoi tournoi, BindingResult bindingResult, Model model) {
+
+        // Par sécurité, on vérifie également dans PostMapping qu'on est connecté :
+        if (!authService.isLogged()) {
+            return "redirect:/login";
+        }
 
         // --- Validation de formulaire ---
         if (bindingResult.hasErrors()) { // BindingResult capture les erreurs de validation

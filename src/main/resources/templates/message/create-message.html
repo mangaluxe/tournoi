@@ -18,11 +18,13 @@
                     <label for="titre">Titre :</label>
                     <br>
                     <input type="text" id="titre" name="titre" placeholder="Ajoutez un titre" th:field="*{titre}">
+                    <p th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}" class="i warning"></p>
                 </div>
 
                 <div class="form-group">
                     <label for="contenu">Contenu :</label>
                     <textarea id="contenu" name="contenu" placeholder="Rédigez votre message" th:field="*{contenu}"></textarea>
+                    <p th:if="${#fields.hasErrors('contenu')}" th:errors="*{contenu}" class="i warning"></p>
                 </div>
                 <button class="btn">Publier</button>
             </form>

@@ -10,7 +10,10 @@
 
         <h1 class="h1 center">Créer un Tournoi</h1>
 
-        <div th:if="${session.login != null}">
+        <!-- <div th:if="${session.login != null}">-->
+        <!-- Il est recommandé de faire la vérification dans le contrôleur et de passer l'état de connexion via le modèle, au lieu de vérifier la session directement dans la vue -->
+
+        <div th:if="${isLogged == true}">
 
             <form action="#" th:action="@{/tournoi/nouveau}" th:object="${tournoi}" method="post">
                 <div>
@@ -61,13 +64,13 @@
 
         </div>
 
-        <div th:if="${session.login == null}">
+        <!-- <div th:if="${session.login == null}"> -->
+        <div th:if="${isLogged == false}">
             <p>Vous devez vous connecter pour créer un tournoi.</p>
         </div>
 
     </main>
 </div>
-
 
 
 

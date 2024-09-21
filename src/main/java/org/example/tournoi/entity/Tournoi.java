@@ -32,6 +32,7 @@ public class Tournoi {
 
     @NotBlank(message = "Règle obligatoire")
     @MyValid(message = "Gros mots interdits") // Validation personnalisée
+    @Column(columnDefinition = "text")
     private String regles;
 
     @NotNull(message = "Nb max joueurs obligatoire")
