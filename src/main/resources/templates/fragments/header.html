@@ -125,7 +125,7 @@
                 </div>
 
                 <div th:if="${session.login != null}">
-                    <a href="javascript:void(0)" class="icon-user" id="profil-drop"><span class="txt"><span th:text="${session.pseudo}">Pseudo</span></span></a>
+                    <a href="javascript:void(0)" class="icon-user" id="profil-drop"><span class="txt" th:text="${session.pseudo}">Pseudo</span></a>
                     <div class="profil-dropdown">
                         <div class="profil-dropdown-menu">
                             <a th:href="@{/espace-membre}" rel="nofollow">Espace membre</a>
@@ -136,7 +136,7 @@
                 </div>
 
                 <div th:if="${session.login == null}">
-                    <a href="javascript:void(0)" class="icon-user open-connect"><span class="txt">Connexion</span></a>
+                    <a href="javascript:void(0)" rel="nofollow" class="icon-user open-connect"><span class="txt">Connexion</span></a>
                 </div>
 
             </div>

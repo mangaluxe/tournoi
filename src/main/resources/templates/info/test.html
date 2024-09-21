@@ -1,0 +1,22 @@
+<!-- Inclusion du header -->
+<div th:replace="~{fragments/header :: headerImports}"></div>
+
+
+
+<div class="container">
+    <div th:replace="~{fragments/breadcrumb :: breadcrumb(pageName='', currentPage='')}"></div>
+
+    <main>
+        <h1 class="h1 center">Test</h1>
+
+        <div th:if="${info}">
+            <p th:text="${info}"></p>
+        </div>
+
+    </main>
+</div>
+
+
+
+<!-- Inclusion du footer -->
+<div th:replace="~{fragments/footer :: footerImports}"></div>
