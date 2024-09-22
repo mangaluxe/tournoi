@@ -8,6 +8,8 @@
     <main>
         <h1 class="h1 center">Récupération de Mot de Passe</h1>
 
+        <p class="mt-5">Entrez vos informations pour qu'on vous génère un nouveau mot de passe temporaire.</p>
+
         <div th:if="${message}">
             <p th:text="${message}" class="success"></p>
         </div>
@@ -16,7 +18,7 @@
             <p th:text="${error}" class="warning"></p>
         </div>
 
-        <form th:action="@{/motdepasse-oublie}" method="post">
+        <form th:action="@{/motdepasse-oublie}" method="post" class="mt-5">
             <input type="hidden" name="csrfToken" th:value="${csrfToken}">
             <div>
                 <label for="pseudo">Pseudo :
@@ -31,6 +33,8 @@
 
             <button type="submit" class="btn">Récupérer Mot de Passe</button>
         </form>
+
+        <p class="mt-5"><a th:href="@{/login}">Vous connecter</a></p>
 
     </main>
 </div>

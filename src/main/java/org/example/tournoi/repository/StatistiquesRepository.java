@@ -1,4 +1,4 @@
-package org.example.tournoi.dao;
+package org.example.tournoi.repository;
 
 import org.example.tournoi.entity.Statistique;
 import org.example.tournoi.entity.Utilisateur;

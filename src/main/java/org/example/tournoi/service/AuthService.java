@@ -1,8 +1,8 @@
 package org.example.tournoi.service;
 
 import jakarta.servlet.http.HttpSession;
-import org.example.tournoi.dao.RoleRepository;
-import org.example.tournoi.dao.UtilisateurRepository;
+import org.example.tournoi.repository.RoleRepository;
+import org.example.tournoi.repository.UtilisateurRepository;
 import org.example.tournoi.entity.Role;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +33,8 @@ public class AuthService {
 
     // ========== Méthodes ==========
 
+    // ----- Create -----
+
     public Utilisateur register(Utilisateur utilisateur) {
         if (utilisateurRepository.existsByPseudo(utilisateur.getPseudo())) {
             throw new IllegalArgumentException("Ce pseudo est déjà utilisé, veuillez en choisir un autre.");
@@ -46,10 +48,9 @@ public class AuthService {
         utilisateur.setMotdepasse(hashedPassword); // Remplacer le mot de passe par sa version hashée
 
         return utilisateurRepository.save(utilisateur);
-
-
     }
 
+    // ----- Read -----
 
 //    public boolean login(String pseudo, String motdepasse) {
 //        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);

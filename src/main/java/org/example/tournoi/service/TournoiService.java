@@ -1,6 +1,6 @@
 package org.example.tournoi.service;
 
-import org.example.tournoi.dao.TournoiRepository;
+import org.example.tournoi.repository.TournoiRepository;
 import org.example.tournoi.entity.Tournoi;
 import org.example.tournoi.util.Levenshtein;
 import org.springframework.stereotype.Service;

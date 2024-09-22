@@ -1,8 +1,8 @@
 package org.example.tournoi.service;
 
 import jakarta.annotation.PostConstruct;
-import org.example.tournoi.dao.RoleRepository;
-import org.example.tournoi.dao.UtilisateurRepository;
+import org.example.tournoi.repository.RoleRepository;
+import org.example.tournoi.repository.UtilisateurRepository;
 import org.example.tournoi.entity.Role;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;

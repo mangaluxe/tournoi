@@ -1,6 +1,6 @@
 package org.example.tournoi.service;
 
-import org.example.tournoi.dao.StatistiquesRepository;
+import org.example.tournoi.repository.StatistiquesRepository;
 import org.example.tournoi.entity.Statistique;
 import org.example.tournoi.entity.Utilisateur;
 import org.springframework.stereotype.Service;

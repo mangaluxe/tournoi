@@ -1,9 +1,7 @@
 package org.example.tournoi.service;
 
-import jakarta.servlet.http.HttpSession;
-import org.example.tournoi.dao.MessageRepository;
+import org.example.tournoi.repository.MessageRepository;
 import org.example.tournoi.entity.Message;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

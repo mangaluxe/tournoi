@@ -1,9 +1,7 @@
 package org.example.tournoi.service;
 
-import org.example.tournoi.dao.InscriptionRepository;
+import org.example.tournoi.repository.InscriptionRepository;
 import org.example.tournoi.entity.Inscription;
-import org.example.tournoi.entity.Tournoi;
-import org.example.tournoi.entity.Utilisateur;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
