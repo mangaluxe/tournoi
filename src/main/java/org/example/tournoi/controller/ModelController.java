@@ -22,11 +22,16 @@ public class ModelController {
 
         String csrfToken = (String) session.getAttribute("csrfToken");
 
+        System.out.println("Session ID: " + session.getId()); // Debug
+        System.out.println("Token CSRF actuel: " + csrfToken); // Debug
+
         if (csrfToken == null) { // Génère un token CSRF si ce n'est pas déjà présent dans la session
             SecureRandom secureRandom = new SecureRandom();
             byte[] token = new byte[32];
             secureRandom.nextBytes(token);
             csrfToken = Base64.getEncoder().encodeToString(token);
+
+            System.out.println("Génération d'un nouveau token CSRF: " + csrfToken);
 
             session.setAttribute("csrfToken", csrfToken); // Pour qu'on puisse utiliser dans le html
         }

@@ -91,13 +91,12 @@ public class AuthController {
         // --- ---
 
         boolean connected = authService.login(utilisateur.getPseudo(), utilisateur.getMotdepasse());
-        System.out.println("Connexion réussie ? " + connected); // Debug
+//        System.out.println("Connexion réussie ? " + connected); // Debug
 
         if (connected) {
-            // Récupération du rôle de l'utilisateur connecté
-            String role = authService.getCurrentUserRole();
+            String role = authService.getCurrentUserRole(); // Récupération du rôle de l'utilisateur connecté
 
-            System.out.println("Rôle utilisateur : " + role); // Debug
+//            System.out.println("Rôle utilisateur : " + role); // Debug
 
             // Ajout d'un message de succès à la session
             redirectAttributes.addFlashAttribute("successMessage", "Connexion réussie !"); // Message flash
