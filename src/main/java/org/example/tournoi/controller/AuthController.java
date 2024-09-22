@@ -4,9 +4,12 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.tournoi.entity.Utilisateur;
 import org.example.tournoi.service.AuthService;
+import org.example.tournoi.validation.OnLogin;
+import org.example.tournoi.validation.OnRegistration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +39,7 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public String inscriptionForm(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam("csrfToken") String csrfToken, HttpSession session, Model model) {
+    public String inscriptionForm(@Validated(OnRegistration.class) @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam("csrfToken") String csrfToken, HttpSession session, Model model) {
         // --- Vérification du token CSRF ---
         String sessionCsrfToken = (String) session.getAttribute("csrfToken");
 
@@ -73,7 +76,7 @@ public class AuthController {
 
     //PostMapping en prenant en compte la gestion des rôles
     @PostMapping("/login")
-    public String connexionForm(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam("csrfToken") String csrfToken, HttpSession session, Model model) {
+    public String connexionForm(@Validated(OnLogin.class) @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam("csrfToken") String csrfToken, HttpSession session, Model model) {
         // --- Vérification du token CSRF ---
         String sessionCsrfToken = (String) session.getAttribute("csrfToken");
 

@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.tournoi.validation.OnLogin; // Interface que j'ai créé pour obliger durant la connexion
+import org.example.tournoi.validation.OnRegistration; // Interface que j'ai créé pour obliger durant l'inscription
 
 import java.time.LocalDate;
 
@@ -25,21 +27,21 @@ public class Utilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Indiquent que le champ id est la clé primaire et qu'il sera auto-généré par la base de données (génération automatique de l'ID)
     private int id;
 
-    @NotBlank(message = "Pseudo obligatoire")
-    @Size(min = 3, message = "Minimum 3 caractères")
+    @NotBlank(message = "Pseudo obligatoire", groups = {OnLogin.class, OnRegistration.class}) // OnLogin et OnRegistration : Obligatoire à l'inscription et connexion
+    @Size(min = 3, max = 100, message = "Entre 3 et 100 caractères", groups = {OnLogin.class, OnRegistration.class})
     @Column(unique = true)
     private String pseudo;
 
     @NotBlank(message = "Mot de passe obligatoire")
-    @Size(min = 3, message = "Minimum 3 caractères")
+    @Size(min = 3, max = 100, message = "Entre 3 et 100 caractères", groups = {OnLogin.class, OnRegistration.class})
     private String motdepasse;
 
     private String nom;
 
     private String prenom;
 
-//    @NotBlank(message = "Email obligatoire") // Pose problème de connexion avec la validation, car email non demandé
-    @Email(message = "Email non valide")
+    @NotBlank(message = "Email obligatoire", groups = OnRegistration.class) // OnRegistration uniquement : Obligatoire uniquement lors de l'inscription
+    @Email(message = "Email invalide", groups = OnRegistration.class)
     private String email;
 
     private LocalDate dateNaissance;
@@ -49,6 +51,7 @@ public class Utilisateur {
     private String profil;
 
     private String preferences;
+
 
     // ---------- Relations ----------
 
